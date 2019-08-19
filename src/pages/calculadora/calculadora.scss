@@ -1,0 +1,101 @@
+.toast-md .toast-wrapper {
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  background: #1c7d0b;
+  border-top: solid 4px #FFF;
+}
+
+ion-toast.error .toast-wrapper {
+	background: #ff9600;
+}
+
+.toast-md .toast-message {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: #fff;
+  padding: 19px 16px 17px;
+}
+
+.toast-button {
+  padding: 19px 16px 17px;
+  font-size: 2.5rem;
+}
+
+page-calculadora {
+  .toolbar-title {
+    color: white;
+  }
+
+  .toolbar-title-md {
+    padding: 0 12px;
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+  .op {
+	font-size: 1.0em;
+  }
+
+  .operacao {
+	  color: #edff00;
+  }
+
+  .toolbar-background {
+    background: #211d70;
+    color: white;
+  }
+
+  .back-button-icon {
+    color: white;
+  }
+
+  .Content {
+    background-color: #8587ad;
+    color: white;
+  }
+
+  .parrafo {
+    width: 10vw;
+  }
+
+  .Button_Share {
+    color: black;
+    font-size: 2.7em;
+    font-weight: 900;
+  }
+
+  .button-md {
+	  height: 6.6rem;
+    padding-top: 18px;
+    padding-bottom: 14px;
+    border-radius: 17px;
+  }
+
+  .vol {
+	  padding-bottom: 10px;
+	  padding-top: 10px;
+	  background-color: brown;
+	  color: #fff;
+  }
+
+  .titulo {
+    font-size: 2em;
+    font-weight: 900;
+  }
+
+  .Columns_Numbers {
+    margin-bottom: 10%;
+  }
+
+  .Column_title {
+    font-size: 3.7em;
+    font-weight: 900;
+    margin-bottom: 10%;
+  }
+}

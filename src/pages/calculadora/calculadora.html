@@ -1,0 +1,73 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title *ngIf="Selected_Operation.id == 1">Adição</ion-title>
+		<ion-title *ngIf="Selected_Operation.id == 2">Subtração</ion-title>
+		<ion-title *ngIf="Selected_Operation.id == 3">Multiplicação</ion-title>
+		<ion-title *ngIf="Selected_Operation.id == 4">Divisão</ion-title>
+		<ion-title *ngIf="Selected_Operation.id == 5">Exponenciação</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding class="Content">
+	<ion-grid>
+		<ion-row>
+			<ion-col class="Column_title operacao" text-center>
+				{{Number1}}
+				<ion-icon class="op" *ngIf="Selected_Operation.id == 1">&nbsp;+&nbsp;</ion-icon>
+				<ion-icon class="op" *ngIf="Selected_Operation.id == 2">&nbsp;-&nbsp;</ion-icon>
+				<ion-icon class="op" *ngIf="Selected_Operation.id == 3">&nbsp;x&nbsp;</ion-icon>
+				<ion-icon class="op" *ngIf="Selected_Operation.id == 4">&nbsp;/&nbsp;</ion-icon>
+				<ion-icon class="op" *ngIf="Selected_Operation.id == 5">&nbsp;^&nbsp;</ion-icon>
+				{{Number2}}
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="Columns_Numbers" text-center>
+				<ion-buttons (click)="Selection(Value_Position1,'1')" id="1">
+					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor1}">
+						{{Value_Position1}}
+					</button>
+				</ion-buttons>
+			</ion-col>
+			<ion-col class="Columns_Numbers" text-center>
+				<ion-buttons (click)="Selection(Value_Position2,'2')" id="2">
+					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor2}">
+						{{Value_Position2}}
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="Columns_Numbers" text-center>
+				<ion-buttons (click)="Selection(Value_Position3,'3')" id="3">
+					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor3}">
+						{{Value_Position3}}
+					</button>
+				</ion-buttons>
+			</ion-col>
+			<ion-col class="Columns_Numbers" text-center>
+				<ion-buttons (click)="Selection(Value_Position4,'4')" id="4">
+					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor4}">
+						{{Value_Position4}}
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col class="Columns_Numbers" text-center>
+				<ion-buttons (click)="onButtonClick()" id="3">
+					<button class="Button_Share vol" ion-button>
+						<ion-icon *ngIf="buttonClicked" name="volume-up"></ion-icon>
+						<ion-icon *ngIf="!buttonClicked" name="volume-off"></ion-icon>
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<!-- <ion-item>
+		<ion-input [(ngModel)]="inputtext" placeholder="type"></ion-input>
+	</ion-item>
+	<button ion-button (click)="saveData()">salvar</button>
+	<button ion-button (click)="loadData()">load</button> -->
+</ion-content>

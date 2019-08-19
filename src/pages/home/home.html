@@ -1,0 +1,63 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+			<img class="logo_top" src="./assets/imgs/logo_jogo.png" width="90%">
+		</ion-title>
+		<ion-buttons end>
+			<button ion-button primary icon-only [navPush]="pushMenu">
+				<ion-icon name="information-circle"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding class="Content"><br>
+	<img class="corner" src="./assets/imgs/top.png">
+	<ion-grid>
+		<ion-row class="row">
+			<ion-col class="columns_Home-ad" [navPush]="pushCalculator" [navParams]="params_addition" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_Calculator-ad">
+						Adição
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row class="row">
+			<ion-col class="columns_Home-sub" [navPush]="pushCalculator" [navParams]="params_subtraction" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_Calculator-sub">
+						Subtração (-)
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row class="row">
+			<ion-col class="columns_Home-div" [navPush]="pushCalculator" [navParams]="params_multiplication" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_Calculator-div">
+						Multiplicação (x)
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row class="row">
+			<ion-col class="columns_Home-mult" [navPush]="pushCalculator" [navParams]="params_Division" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_Calculator-mult">
+						Divisão (&#247;)
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+		<ion-row class="row">
+			<ion-col class="columns_Home-exp" [navPush]="pushCalculator" [navParams]="params_Exponentiation" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_Calculator-exp">
+						Potenciação (x<sup>y</sup>)
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>
