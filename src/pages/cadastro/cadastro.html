@@ -1,0 +1,41 @@
+<ion-content class="login_page register_page" padding>
+  <form class="app_form">
+    <div class="logo">
+      Matemática!
+    </div>
+      <div class="list list-inset">
+          <label class="item item-input">
+              <i class="icon ion-android-person placeholder-icon"></i>
+              <input type="text" placeholder="Nome" name="nome"[(ngModel)]="nome" required>
+          </label>
+           <label class="item item-input">
+              <i class="icon ion-email placeholder-icon"></i>
+              <input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required>
+          </label>
+           <label class="item item-input">
+              <i class="icon ion-locked placeholder-icon"></i>
+              <input type="password" placeholder="Senha" name="senha" [(ngModel)]="senha" required>
+          </label> 
+          <label class="item item-input">
+              <i class="icon ion-locked placeholder-icon"></i>
+              <input type="password" placeholder="Confirmar Senha" required>
+          </label>
+           <label class="item item-input">
+              <i class="icon ion-ipad placeholder-icon"></i>
+              <input type="tel" placeholder="Telefone" name="telefone" [(ngModel)]="telefone" required>
+          </label>
+          <div class="row">
+            <div class="col">
+              <a (click)="cadastrar()" class="button button-block main_btn">
+                 Entrar
+              </a>
+            </div>
+            <div class="col">
+              <a (click)="goToLogin()" class="button button-block">
+                Voltar
+              </a>
+            </div>
+          </div>
+      </div>
+  </form>
+</ion-content>
