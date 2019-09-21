@@ -8,8 +8,7 @@ page-home {
   }
 
   .toolbar-title-md {
-    padding: 0 12px;
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 500;
 }
 
@@ -21,6 +20,11 @@ page-home {
     height: 16vh;
   }
 
+  .button-md.activated {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   .columns_Home-ad {
     background: #92428b;
     border-radius: 12px;
@@ -28,7 +32,8 @@ page-home {
     font-size: 1.4em;
     font-weight: 500;
 	  color: white;
-	  padding: 15px 0 15px 0;
+    padding: 15px 0 15px 0;
+    border: 3px solid #fff;
   }
 
   .buttons_Calculator-ad {
@@ -49,7 +54,8 @@ page-home {
     font-size: 1.4em;
     font-weight: 500;
 	  color: white;
-	  padding: 15px 0 15px 0;
+    padding: 15px 0 15px 0;
+    border: 3px solid #fff;
   }
 
   .buttons_Calculator-sub {
@@ -70,7 +76,8 @@ page-home {
     font-size: 1.4em;
     font-weight: 500;
 	  color: white;
-	  padding: 15px 0 15px 0;
+    padding: 15px 0 15px 0;
+    border: 3px solid #fff;
   }
 
   .buttons_Calculator-div {
@@ -91,7 +98,8 @@ page-home {
     font-size: 1.4em;
     font-weight: 500;
 	  color: white;
-	  padding: 15px 0 15px 0;
+    padding: 15px 0 15px 0;
+    border: 3px solid #fff;
   }
 
   .buttons_Calculator-mult {
@@ -112,7 +120,8 @@ page-home {
     font-size: 1.4em;
     font-weight: 500;
 	  color: white;
-	  padding: 15px 0 15px 0;
+    padding: 15px 0 15px 0;
+    border: 3px solid #fff;
   }
 
   .buttons_Calculator-exp {
@@ -127,7 +136,7 @@ page-home {
   }
 
   .toolbar-background {
-    background: #fff;
+    background: transparent;
     color: white;
   }
 
