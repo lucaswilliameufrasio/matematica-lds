@@ -120,25 +120,29 @@ export class CalculadoraPage {
 		  position: 'bottom'
 		});
 		toast.onDidDismiss(() => {
-			this.cambiarnumero(this.valor, this.click1);
+			this.changeNumber(this.valor, this.click1);
 		});
 		toast.present(toast);
 	}
 
 	erro() {
 		const toast = this.toastCtrl.create({
-			message: 'Ops! a resposta certa está no quadrado VERDE!',
+			message: 'Ops! Pense mais um pouquinho!',
 			showCloseButton: true,
 			closeButtonText: 'Ok',
 			cssClass: "error",
 		});
 		toast.onDidDismiss(() => {
-			this.cambiarnumero(this.valor, this.click1);
+			this.backToWhite();
 		});
+		// toast.onDidDismiss(() => {
+		// 	this.changeNumber(this.valor, this.click1);
+		// });
 		toast.present();
 	}
 
 	Selection(valor: any, click1: any) {
+		// Se a resposta estiver correta, faça...
 		if (valor == this.result) {
 			this.acerto();
 			if (this.buttonClicked) {
@@ -158,6 +162,7 @@ export class CalculadoraPage {
 
 			
 		}
+		//Se a resposta estiver incorreta, faça...
 		else {
 			if (this.buttonClicked) {
 				this.nativeAudio.play('uniqueId2').then((success) => {
@@ -167,82 +172,83 @@ export class CalculadoraPage {
 			if (click1 == 1) {
 				this.buttonColor1 = '#ff9600';
 				if (this.Correct_position == this.Position1) {
-					this.buttonColor1 = '#70e733';
+					// this.buttonColor1 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position2) {
-					this.buttonColor2 = '#70e733';
+					// this.buttonColor2 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position3) {
-					this.buttonColor3 = '#70e733';
+					// this.buttonColor3 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position4) {
-					this.buttonColor4 = '#70e733';
+					// this.buttonColor4 = '#70e733';
 					this.erro();
 				}
 			} else if (click1 == 2) {
 				this.buttonColor2 = '#ff9600';
 
 				if (this.Correct_position == this.Position1) {
-					this.buttonColor1 = '#70e733';
+					// this.buttonColor1 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position2) {
-					this.buttonColor2 = '#70e733';
+					// this.buttonColor2 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position3) {
-					this.buttonColor3 = '#70e733';
+					// this.buttonColor3 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position4) {
-					this.buttonColor4 = '#70e733';
+					// this.buttonColor4 = '#70e733';
 					this.erro();
 				}
 			} else if (click1 == 3) {
 				this.buttonColor3 = '#ff9600';
 				if (this.Correct_position == this.Position1) {
-					this.buttonColor1 = '#70e733';
+					// this.buttonColor1 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position2) {
-					this.buttonColor2 = '#70e733';
+					// this.buttonColor2 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position3) {
-					this.buttonColor3 = '#70e733';
+					// this.buttonColor3 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position4) {
-					this.buttonColor4 = '#70e733';
+					// this.buttonColor4 = '#70e733';
 					this.erro();
 				}
 
 			} else if (click1 == 4) {
 				this.buttonColor4 = '#ff9600';
 				if (this.Correct_position == this.Position1) {
-					this.buttonColor1 = '#70e733';
+					// this.buttonColor1 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position2) {
-					this.buttonColor2 = '#70e733';
+					// this.buttonColor2 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position3) {
-					this.buttonColor3 = '#70e733';
+					// this.buttonColor3 = '#70e733';
 					this.erro();
 				}
 				else if (this.Correct_position == this.Position4) {
-					this.buttonColor4 = '#70e733';
+					// this.buttonColor4 = '#70e733';
 					this.erro();
 				}
 			}
 		}
 	}
 
-	cambiarnumero(valor: any, click1: any) {
+	// Muda os números do cálculo
+	changeNumber(valor: any, click1: any) {
 		this.Number1 = 1;
 		this.Number2 = 2;
 		while (this.Number1 < this.Number2) {
@@ -312,6 +318,13 @@ export class CalculadoraPage {
 		this.buttonColor4 = '#fff9ff';
 	}
 
+	backToWhite(){
+		this.buttonColor1 = '#fff9ff';
+		this.buttonColor2 = '#fff9ff';
+		this.buttonColor3 = '#fff9ff';
+		this.buttonColor4 = '#fff9ff';	
+	}
+	
 	onButtonClick() {
 		this.buttonClicked = !this.buttonClicked;
 	}
