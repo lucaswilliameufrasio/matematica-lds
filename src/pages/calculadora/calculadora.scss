@@ -34,7 +34,7 @@ page-calculadora {
 
   .toolbar-title-md {
     padding: 0 12px;
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 500;
 }
 
@@ -43,7 +43,8 @@ page-calculadora {
   }
 
   .operacao {
-	  color: #edff00;
+	  color: #fbff45;
+    text-shadow: 0 0 3px #211d70, 0 0 11px #211d70;
   }
 
   .toolbar-background {
@@ -56,7 +57,7 @@ page-calculadora {
   }
 
   .Content {
-    background-color: #8587ad;
+    background-color: #b6c1e8;
     color: white;
   }
 
@@ -94,8 +95,7 @@ page-calculadora {
   }
 
   .Column_title {
-    font-size: 3.7em;
+    font-size: 5em;
     font-weight: 900;
-    margin-bottom: 10%;
   }
 }
