@@ -12,6 +12,8 @@ import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { HttpClientModule } from "@angular/common/http";
+import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
+import { AberturaPage } from '../pages/abertura/abertura';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HttpClientModule } from "@angular/common/http";
     CalculadoraPage,
     MenuPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    HomeTDAHPage,
+    AberturaPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,9 @@ import { HttpClientModule } from "@angular/common/http";
     CalculadoraPage,
     MenuPage,
     LoginPage,
-    CadastroPage
+    CadastroPage,
+    HomeTDAHPage,
+    AberturaPage
   ],
   providers: [
     StatusBar,

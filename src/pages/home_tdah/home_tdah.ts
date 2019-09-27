@@ -4,11 +4,12 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { CalculadoraPage } from '../calculadora/calculadora';
 import { MenuPage } from '../menu/menu';
 import { LoginPage } from '../login/login';
+import { AberturaPage } from '../abertura/abertura';
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-home_tdah',
+  templateUrl: 'home_tdah.html'
 })
-export class HomePage {
+export class HomeTDAHPage {
 
   pushCalculator: any;
   pushMenu: any;
@@ -46,5 +47,9 @@ export class HomePage {
 
   goToLogin() {
     this.nav.push(LoginPage);
+  }
+
+  goToAbertura(){
+    this.nav.setRoot(AberturaPage);
   }
 }

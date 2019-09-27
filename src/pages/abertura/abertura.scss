@@ -1,0 +1,58 @@
+page-abertura {
+    .foto1 {
+        background: url(../assets/img/01.jpg) no-repeat;
+        background-size: 40% 100%;
+        position: fixed;
+        padding: 50px 100px 120px 250px;
+        right: -52px;
+        background-position: right;
+    }
+
+    .foto2 {
+        background: url(../assets/img/02.jpg) no-repeat;
+        background-size: 40% 100%;
+        position: absolute;
+        padding: 50px 100px 120px 250px;
+        left: -46px;
+    }
+
+    .foto3 {
+        background: url(../assets/img/03.jpg) no-repeat;
+        background-size: 50% 100%;
+        position: absolute;
+        padding: 50px 100px 120px 250px;
+        /* left: 77%; */
+        top: 70%;
+        background-position: center;
+    }
+
+    .titulo {
+        font-size: 3em;
+        text-align: center;
+        margin-top: 120px;
+    }
+
+    .opcao1 {
+        padding: 10% 0 10% 0;
+        background-color: darkgreen;
+        text-align: center;
+        color: #fff;
+        font-size: 24px;
+        margin: 0 !important;
+        border-radius: 25px;
+    }
+
+    .opcao2 {
+        padding:10% 0 10% 0;
+        background-color: darkblue;
+        text-align: center;
+        color: #fff;
+        font-size: 24px;
+        margin: 0 !important;
+        border-radius: 25px;
+    }
+
+    scroll-content {
+        height: 100% !important;
+    }
+}
