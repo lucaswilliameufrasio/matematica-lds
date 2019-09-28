@@ -28,6 +28,48 @@ ion-toast.error .toast-wrapper {
 }
 
 page-calculadora {
+  .login_page{
+    background:url(../assets/img/bg.png)no-repeat;
+    background-size:100% 100%;
+    padding:20px;
+    margin:0
+  }
+
+  .pontos {
+    color: #FFF;
+    font-size: 4rem;
+    text-align: center;
+    line-height: 1;
+  }
+
+  .pontostit {
+    color: #FFF;
+    text-align: center;
+  }
+
+  .tempo {
+    text-align: center;
+    color: #FFF;
+    font-size: 2rem;
+  }
+
+  .erro {
+    color: red;
+    border: #FFF solid 1px;
+  }
+
+  .acertos {
+    background-color: #FFF;
+    border-radius: 2px;
+    padding: 5px 5px 0 5px;
+    width: 100px;
+  }
+
+  .vidas {
+    color: #1c7d0b;
+    border: #FFF solid 1px;
+  }
+
   .toolbar-title {
     color: white;
   }
@@ -91,7 +133,7 @@ page-calculadora {
   }
 
   .Columns_Numbers {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
   }
 
   .Column_title {

@@ -3,12 +3,14 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { ToastController } from 'ionic-angular';
+
 @Component({
-	selector: 'page-calculadora',
-	templateUrl: 'calculadora.html',
+  selector: 'page-calculadora-tdah',
+  templateUrl: 'calculadora-tdah.html',
 })
-export class CalculadoraPage {
-	Amount_Play = 0;
+export class CalculadoraTdahPage {
+
+  Amount_Play = 0;
 	public buttonClicked: boolean = true;
 	Selected_Operation: any;
 	Number1 = 1;
@@ -31,87 +33,86 @@ export class CalculadoraPage {
 	valor: any;
 	click1: any;
 
-	constructor(
-		public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
 		public navParams: NavParams,
 		public platform: Platform,
 		private nativeAudio: NativeAudio,
 		public toastCtrl: ToastController,
-		) {
+    ) {
+      this.platform.ready().then(() => {
+        this.nativeAudio.preloadSimple('uniqueId1', 'assets/audio/zapsplat_cartoon_ascend_slide_whistle_float_up_18047.mp3').then((success) => {
+        }, (error) => {
+        }
+        );
+      });
+      this.platform.ready().then(() => {
+        this.nativeAudio.preloadSimple('uniqueId2', 'assets/audio/zapsplat_cartoon_descend_fast_marimba_18054.mp3').then((success) => {
+        }, (error) => {
+        }
+        );
+      });
+  
+      this.Selected_Operation = this.navParams.data;
+  
+      while (this.Number1 < this.Number2) {
+        if (this.Selected_Operation.id == 5) {
+          this.Number1 = Math.floor(Math.random() * 8 + 1);
+          this.Number2 = Math.floor(Math.random() * 3 + 1);
+        }
+        else {
+          this.Number1 = Math.floor(Math.random() * 50 + 1);
+          this.Number2 = Math.floor(Math.random() * 50 + 1);
+        }
+        if (this.Number1 % this.Number2 != 0) {
+          this.Number2 = 100;
+        }
+      }
+  
+      this.Correct_position = Math.floor(Math.random() * 4 + 1);
+      if (this.Selected_Operation.id == 1) {
+        this.result = this.Number1 + this.Number2
+      }
+      else if (this.Selected_Operation.id == 2) {
+        this.result = this.Number1 - this.Number2
+      }
+      else if (this.Selected_Operation.id == 3) {
+        this.result = this.Number1 * this.Number2
+      }
+      else if (this.Selected_Operation.id == 4) {
+        this.result = this.Number1 / this.Number2
+      }
+      else if (this.Selected_Operation.id == 5) {
+        this.result = Math.pow(this.Number1, this.Number2);
+      }
+  
+      if (this.Correct_position == this.Position1) {
+        this.Value_Position1 = this.result;
+        this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
+        this.Value_Position3 = this.result - 5;
+        this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+      }
+      else if (this.Correct_position == this.Position2) {
+        this.Value_Position2 = this.result;
+        this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+        this.Value_Position3 = this.result - 5;
+        this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+      }
+      else if (this.Correct_position == this.Position3) {
+        this.Value_Position3 = this.result;
+        this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+        this.Value_Position2 = this.result - 5;
+        this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+      }
+      else if (this.Correct_position == this.Position4) {
+        this.Value_Position4 = this.result;
+        this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+        this.Value_Position2 = this.result - 5;
+        this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
+      }
+  }
 
-		this.platform.ready().then(() => {
-			this.nativeAudio.preloadSimple('uniqueId1', 'assets/audio/zapsplat_cartoon_ascend_slide_whistle_float_up_18047.mp3').then((success) => {
-			}, (error) => {
-			}
-			);
-		});
-		this.platform.ready().then(() => {
-			this.nativeAudio.preloadSimple('uniqueId2', 'assets/audio/zapsplat_cartoon_descend_fast_marimba_18054.mp3').then((success) => {
-			}, (error) => {
-			}
-			);
-		});
-
-		this.Selected_Operation = this.navParams.data;
-
-		while (this.Number1 < this.Number2) {
-			if (this.Selected_Operation.id == 5) {
-				this.Number1 = Math.floor(Math.random() * 8 + 1);
-				this.Number2 = Math.floor(Math.random() * 3 + 1);
-			}
-			else {
-				this.Number1 = Math.floor(Math.random() * 50 + 1);
-				this.Number2 = Math.floor(Math.random() * 50 + 1);
-			}
-			if (this.Number1 % this.Number2 != 0) {
-				this.Number2 = 100;
-			}
-		}
-
-		this.Correct_position = Math.floor(Math.random() * 4 + 1);
-		if (this.Selected_Operation.id == 1) {
-			this.result = this.Number1 + this.Number2
-		}
-		else if (this.Selected_Operation.id == 2) {
-			this.result = this.Number1 - this.Number2
-		}
-		else if (this.Selected_Operation.id == 3) {
-			this.result = this.Number1 * this.Number2
-		}
-		else if (this.Selected_Operation.id == 4) {
-			this.result = this.Number1 / this.Number2
-		}
-		else if (this.Selected_Operation.id == 5) {
-			this.result = Math.pow(this.Number1, this.Number2);
-		}
-
-		if (this.Correct_position == this.Position1) {
-			this.Value_Position1 = this.result;
-			this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
-			this.Value_Position3 = this.result - 5;
-			this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-		}
-		else if (this.Correct_position == this.Position2) {
-			this.Value_Position2 = this.result;
-			this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-			this.Value_Position3 = this.result - 5;
-			this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-		}
-		else if (this.Correct_position == this.Position3) {
-			this.Value_Position3 = this.result;
-			this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-			this.Value_Position2 = this.result - 5;
-			this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-		}
-		else if (this.Correct_position == this.Position4) {
-			this.Value_Position4 = this.result;
-			this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-			this.Value_Position2 = this.result - 5;
-			this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
-		}
-	}
-
-	ionViewDidLoad() {
+  ionViewDidLoad() {
 	}
 
 	acerto() {
@@ -330,5 +331,4 @@ export class CalculadoraPage {
 		this.buttonClicked = !this.buttonClicked;
 	}
 
-	
 }
