@@ -6,11 +6,11 @@
       <div class="list list-inset">
           <label class="item item-input">
               <ion-icon class="login" color="light" name="person"></ion-icon>
-              <input type="text" placeholder="Usuário">
+              <input type="text" placeholder="Email" name="email"[(ngModel)]="email" required>
           </label>
           <label class="item item-input">
               <ion-icon class="login" color="light" name="key"></ion-icon>
-              <input type="password" placeholder="Senha">
+              <input type="password" placeholder="Senha" name="senha" [(ngModel)]="senha" required>
           </label>
           <div class="row">
             <div class="col">
@@ -24,9 +24,6 @@
               </div>
             </div>
           </div>
-          <button class="button button-block face_btn">
-            Login com Facebook
-          </button>
          <div class="row skip_forget">
            <div class="col">
               <a class="button button-clear forgot" ng-click="forget_password()">Esqueci minha senha</a>
