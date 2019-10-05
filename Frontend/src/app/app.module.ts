@@ -8,7 +8,6 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CalculadoraPage } from '../pages/calculadora/calculadora';
-import { CalculadoraTdahPage } from '../pages/calculadora-tdah/calculadora-tdah';
 import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
