@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SocialSharing } from '@ionic-native/social-sharing';
-import { CalculadoraPage } from '../calculadora/calculadora';
 import { MenuPage } from '../menu/menu';
-import { LoginPage } from '../login/login';
 import { AberturaPage } from '../abertura/abertura';
 import { CalculadoraTdahPage } from '../calculadora-tdah/calculadora-tdah';
 @Component({
@@ -22,7 +19,6 @@ export class HomeTDAHPage {
 
   constructor(
     public navCtrl: NavController,
-    private socialSharing: SocialSharing,
     public nav: NavController,
   ) {
     this.pushCalculator = CalculadoraTdahPage;
@@ -32,10 +28,6 @@ export class HomeTDAHPage {
     this.params_multiplication = { id: 3 };
     this.params_Division = { id: 4 };
     this.params_Exponentiation = { id: 5 };
-  }
-
-  goToLogin() {
-    this.nav.push(LoginPage);
   }
 
   goToAbertura(){
