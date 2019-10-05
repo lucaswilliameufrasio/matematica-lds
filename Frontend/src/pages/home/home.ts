@@ -63,42 +63,36 @@ export class HomePage {
 
   logout() {
 
-    alert("Saiu com sucesso.")
-    this.storage.remove('access_token');
-    this.nav.push(LoginPage);
+    let api = 'http://127.0.0.1:8001';
 
-    // let api = 'http://127.0.0.1:8001';
+    this.storage.get('access_token').then((token) => {
+      if (token != null) {
+        let headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+          'Accept': 'application/json'
+        });
 
-    // this.storage.get('access_token').then((token) => {
-    //   if (token != null) {
-    //     let headers = new HttpHeaders({});
+        console.log(token);
+        console.log(headers);
 
-    //     console.log(token);
-    //     headers = headers.set('Authorization', 'Bearer ' + token);
-    //     headers = headers.set('Accept', 'application/json');
-    //     headers = headers.set('Access-Control-Allow-Origin', '*');
-    //     console.log(headers);
-
-
-    //     this.http.post(api + '/auth/logout', {
-    //       headers: new HttpHeaders().set('Authorization', 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NzAyNzE0NzMsImV4cCI6MTU3MDI3NTA3MywibmJmIjoxNTcwMjcxNDczLCJqdGkiOiJhc0p4MEFmb1kxRDFRVWIzIiwic3ViIjozLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.CfBCbYUEakdKnportFU5o9GTz-WdYWQdri-xnuZBrcU'),
-    //     })
-    //       .subscribe(res => {
-    //         console.log(res);
-    //         console.log(headers)
-    //         if (res['success']) {
-    //           alert("Saiu com sucesso.")
-    //           this.storage.remove('access_token');
-    //           this.nav.push(LoginPage);
-    //         } else {
-    //           alert(res)
-    //         }
-    //       }, (error) => {
-    //         console.log(error);
-    //       });
-    //     }
-    //   }
-    // )
-    
+        this.http.post(api + '/auth/logout', {},{
+          headers: headers,
+        })
+          .subscribe(res => {
+            console.log(res);
+            console.log(headers)
+            if (res['success']) {
+              alert("Saiu com sucesso.")
+              this.storage.remove('access_token');
+              this.nav.push(LoginPage);
+            } else {
+              alert(res)
+            }
+          }, (error) => {
+            console.log(error);
+          });
+      }
+    }
+    )
   }
 }
