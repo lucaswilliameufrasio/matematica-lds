@@ -13,5 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('usuario', 'UserController@cadastrarUsuario');
+Route::group([
+    'prefix' => 'auth'
+    
+], function ($router) {
+    Route::post('login', 'AuthController@login');
+    Route::post('register', 'UserController@registerUser');
+});
 
+Route::group([
+    'middleware' => 'jwt.verify',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'UserController@me');
+
+});
