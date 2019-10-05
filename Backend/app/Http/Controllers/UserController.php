@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function cadastrarUsuario(Request $request)
+    public function registerUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'nome' => 'required|string',
@@ -25,12 +25,21 @@ class UserController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => bcrypt($request->senha),
-            'telefone' => $request->telefone,
+            'cellphone' => $request->telefone,
         ]);
         return response()->json([
             'data' => $usuario,
         ], 200,
             ['Content-type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
-
+    
+    /**
+     * Retorna o Usuário autenticado.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
 }
