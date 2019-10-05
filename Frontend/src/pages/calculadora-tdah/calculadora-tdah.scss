@@ -1,104 +1,143 @@
-page-calculadora-tdah {
-
 .toast-md .toast-wrapper {
-    left: 0;
-    right: 0;
-    margin: auto;
-    position: absolute;
-    z-index: 10;
-    display: block;
-    width: 100%;
-    max-width: 700px;
-    background: #1c7d0b;
-    border-top: solid 4px #FFF;
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  background: #1c7d0b;
+  border-top: solid 4px #FFF;
+}
+
+ion-toast.error .toast-wrapper {
+	background: #ff9600;
+}
+
+.toast-md .toast-message {
+  font-size: 2.5rem;
+  line-height: 1;
+  color: #fff;
+  padding: 19px 16px 17px;
+}
+
+.toast-button {
+  padding: 19px 16px 17px;
+  font-size: 2.5rem;
+}
+
+page-calculadora-tdah {
+  .login_page{
+    background:url(../assets/img/bg.png)no-repeat;
+    background-size:100% 100%;
+    padding:20px;
+    margin:0
   }
-  
-  ion-toast.error .toast-wrapper {
-      background: #ff9600;
-  }
-  
-  .toast-md .toast-message {
-    font-size: 2.5rem;
+
+  .pontos {
+    color: #FFF;
+    font-size: 4rem;
+    text-align: center;
     line-height: 1;
-    color: #fff;
-    padding: 19px 16px 17px;
   }
-  
-  .toast-button {
-    padding: 19px 16px 17px;
-    font-size: 2.5rem;
+
+  .pontostit {
+    color: #FFF;
+    text-align: center;
   }
-  
-  page-calculadora {
-    .toolbar-title {
-      color: white;
-    }
-  
-    .toolbar-title-md {
-      padding: 0 12px;
-      font-size: 4rem;
-      font-weight: 500;
+
+  .tempo {
+    text-align: center;
+    color: #FFF;
+    font-size: 2rem;
   }
-  
-    .op {
-      font-size: 1.0em;
-    }
-  
-    .operacao {
-        color: #fbff45;
-      text-shadow: 0 0 3px #211d70, 0 0 11px #211d70;
-    }
-  
-    .toolbar-background {
-      background: #211d70;
-      color: white;
-    }
-  
-    .back-button-icon {
-      color: white;
-    }
-  
-    .Content {
-      background-color: #b6c1e8;
-      color: white;
-    }
-  
-    .parrafo {
-      width: 10vw;
-    }
-  
-    .Button_Share {
-      color: black;
-      font-size: 2.7em;
-      font-weight: 900;
-    }
-  
-    .button-md {
-        height: 6.6rem;
-      padding-top: 18px;
-      padding-bottom: 14px;
-      border-radius: 17px;
-    }
-  
-    .vol {
-        padding-bottom: 10px;
-        padding-top: 10px;
-        background-color: brown;
-        color: #fff;
-    }
-  
-    .titulo {
-      font-size: 2em;
-      font-weight: 900;
-    }
-  
-    .Columns_Numbers {
-      margin-bottom: 10%;
-    }
-  
-    .Column_title {
-      font-size: 5em;
-      font-weight: 900;
-    }
+
+  .erro {
+    color: red;
+    border: #FFF solid 1px;
+  }
+
+  .acertos {
+    background-color: #FFF;
+    border-radius: 2px;
+    padding: 5px 5px 0 5px;
+    width: 100px;
+  }
+
+  .vidas {
+    color: #1c7d0b;
+    border: #FFF solid 1px;
+  }
+
+  .toolbar-title {
+    color: white;
+  }
+
+  .toolbar-title-md {
+    padding: 0 12px;
+    font-size: 4rem;
+    font-weight: 500;
+}
+
+  .op {
+	font-size: 1.0em;
+  }
+
+  .operacao {
+	  color: #fbff45;
+    text-shadow: 0 0 3px #211d70, 0 0 11px #211d70;
+  }
+
+  .toolbar-background {
+    background: #211d70;
+    color: white;
+  }
+
+  .back-button-icon {
+    color: white;
+  }
+
+  .Content {
+    background-color: #b6c1e8;
+    color: white;
+  }
+
+  .parrafo {
+    width: 10vw;
+  }
+
+  .Button_Share {
+    color: black;
+    font-size: 2.7em;
+    font-weight: 900;
+  }
+
+  .button-md {
+	  height: 6.6rem;
+    padding-top: 18px;
+    padding-bottom: 14px;
+    border-radius: 17px;
+  }
+
+  .vol {
+	  padding-bottom: 10px;
+	  padding-top: 10px;
+	  background-color: brown;
+	  color: #fff;
+  }
+
+  .titulo {
+    font-size: 2em;
+    font-weight: 900;
+  }
+
+  .Columns_Numbers {
+    margin-bottom: 5%;
+  }
+
+  .Column_title {
+    font-size: 5em;
+    font-weight: 900;
   }
 }
