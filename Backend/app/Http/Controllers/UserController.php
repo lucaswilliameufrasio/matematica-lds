@@ -14,7 +14,7 @@ class UserController extends Controller
             'nome' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'senha' => 'required|string',
-            'telefone' => 'required',
+            'telefone' => 'required|min:14|regex:/^\(\d{2}\)\s\d{4}-\d{4}$/',
         ]);
 
         if ($validator->fails()) {
