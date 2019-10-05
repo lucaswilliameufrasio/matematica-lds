@@ -35,7 +35,7 @@ export class CadastroPage {
     var api = 'http://127.0.0.1:8001';
     var dados = JSON.stringify({ nome: this.nome, email: this.email, senha: this.senha, telefone: this.telefone });
 
-    this.http.post(api + '/usuario', dados, {
+    this.http.post(api + '/auth/register', dados, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
