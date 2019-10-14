@@ -17,8 +17,6 @@ import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
 import { AberturaPage } from '../pages/abertura/abertura';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { EnvironmentEnvironmentProvider } from '../providers/environment-environment/environment-environment';
-import { EnvironmentProvider } from '../providers/environment/environment';
 
 export function jwtOptionsFactory(storage) {
   
@@ -73,8 +71,6 @@ export function jwtOptionsFactory(storage) {
     SocialSharing,
     NativeAudio,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EnvironmentEnvironmentProvider,
-    EnvironmentProvider,
   ]
 })
 export class AppModule { }
