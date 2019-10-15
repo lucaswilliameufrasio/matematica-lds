@@ -17,6 +17,8 @@ import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
 import { AberturaPage } from '../pages/abertura/abertura';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { RankingPage } from '../pages/ranking/ranking';
 
 export function jwtOptionsFactory(storage) {
   
@@ -39,6 +41,8 @@ export function jwtOptionsFactory(storage) {
     HomeTDAHPage,
     AberturaPage,
     CalculadoraTdahPage,
+    PerfilPage,
+    RankingPage
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,8 @@ export function jwtOptionsFactory(storage) {
     HomeTDAHPage,
     AberturaPage,
     CalculadoraTdahPage,
+    PerfilPage,
+    RankingPage,
   ],
   providers: [
     StatusBar,
