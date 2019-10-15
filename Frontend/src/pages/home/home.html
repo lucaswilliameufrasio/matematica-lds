@@ -4,9 +4,9 @@
 			&nbsp;Matemática!
 		</ion-title>
 		<ion-buttons end>
-		<button ion-button primary icon-only (click)="logout()">
-			<ion-icon name="log-out"></ion-icon>
-		</button>
+			<button ion-button primary icon-only (click)="logout()">
+				<ion-icon name="log-out"></ion-icon>
+			</button>
 		</ion-buttons>
 		<ion-buttons end>
 			<button ion-button primary icon-only [navPush]="pushMenu">
@@ -17,6 +17,18 @@
 </ion-header>
 
 <ion-content padding class="login_page">
+
+	<ion-buttons start>
+		<button ion-button primary icon-only [navPush]="gotoProfile">
+			<ion-icon name="ios-person">Perfil</ion-icon>
+		</button>
+	</ion-buttons>
+	<ion-buttons start>
+		<button ion-button primary icon-only [navPush]="gotoRanking">
+			<ion-icon name="trophy">Ranking</ion-icon>
+		</button>
+	</ion-buttons>
+
 	<ion-grid>
 		<ion-row class="row">
 			<ion-col class="columns_Home-ad" [navPush]="pushCalculator" [navParams]="params_addition" text-center>
@@ -37,7 +49,8 @@
 			</ion-col>
 		</ion-row>
 		<ion-row class="row">
-			<ion-col class="columns_Home-div" [navPush]="pushCalculator" [navParams]="params_multiplication" text-center>
+			<ion-col class="columns_Home-div" [navPush]="pushCalculator" [navParams]="params_multiplication"
+				text-center>
 				<ion-buttons start>
 					<button ion-button class="buttons_Calculator-div">
 						Multiplicação (x)
@@ -55,7 +68,8 @@
 			</ion-col>
 		</ion-row>
 		<ion-row class="row">
-			<ion-col class="columns_Home-exp" [navPush]="pushCalculator" [navParams]="params_Exponentiation" text-center>
+			<ion-col class="columns_Home-exp" [navPush]="pushCalculator" [navParams]="params_Exponentiation"
+				text-center>
 				<ion-buttons start>
 					<button ion-button class="buttons_Calculator-exp">
 						Potenciação (x<sup>y</sup>)
