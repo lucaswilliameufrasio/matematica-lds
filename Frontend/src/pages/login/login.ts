@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
+import { AberturaPage } from '../abertura/abertura';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 
@@ -14,6 +17,7 @@ export class LoginPage {
 
   email: string = '';
   senha: string = '';
+  pushHome: any;
 
   constructor(
     public navCtrl: NavController,
@@ -22,6 +26,7 @@ export class LoginPage {
     public http: HttpClient,
     private storage: Storage,
   ) {
+    this.pushHome = AberturaPage;
   }
 
   ionViewDidLoad() {
