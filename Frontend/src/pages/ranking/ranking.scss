@@ -1,0 +1,30 @@
+page-ranking {
+    .nome {
+        font-size: 18px;
+    }
+
+    .toolbar-background {
+        background: #211d70;
+        color: white;
+      }
+
+    .ponto {
+        font-size: 13px;
+    }
+
+    .item-md p {
+        margin: 0 0 -8px !important;
+    }
+
+    .toolbar-title {
+        color: white;
+      }
+      ion-navbar.toolbar {
+
+        color: #fff;
+    }
+
+    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
+        color: #fff;
+    }
+}

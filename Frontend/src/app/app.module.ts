@@ -25,6 +25,8 @@ import { LogoutService } from '../services/logout.service';
 import { ToastService } from '../services/toast.service';
 
 
+import { PerfilPage } from '../pages/perfil/perfil';
+import { RankingPage } from '../pages/ranking/ranking';
 
 export function jwtOptionsFactory(storage) {
 
@@ -47,6 +49,8 @@ export function jwtOptionsFactory(storage) {
     HomeTDAHPage,
     AberturaPage,
     CalculadoraTdahPage,
+    PerfilPage,
+    RankingPage
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,8 @@ export function jwtOptionsFactory(storage) {
     HomeTDAHPage,
     AberturaPage,
     CalculadoraTdahPage,
+    PerfilPage,
+    RankingPage,
   ],
   providers: [
     CadastroService,

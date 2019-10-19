@@ -2,8 +2,12 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { CalculadoraPage } from '../calculadora/calculadora';
+
 import { MenuPage } from '../menu/menu';
 import { LoginPage } from '../login/login';
+import { PerfilPage } from '../perfil/perfil';
+import { RankingPage} from '../ranking/ranking';
+
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -15,6 +19,8 @@ export class HomePage {
 
   pushCalculator: any;
   pushMenu: any;
+  gotoProfile: any;
+  gotoRanking: any;
   params_addition: Object;
   params_subtraction: Object;
   params_multiplication: Object;
@@ -30,6 +36,8 @@ export class HomePage {
   ) {
     this.pushCalculator = CalculadoraPage;
     this.pushMenu = MenuPage;
+    this.gotoProfile = PerfilPage;
+    this.gotoRanking = RankingPage;
     this.params_addition = { id: 1 };
     this.params_subtraction = { id: 2 };
     this.params_multiplication = { id: 3 };
@@ -84,15 +92,15 @@ export class HomePage {
             if (res['success']) {
               alert("Saiu com sucesso.")
               this.storage.remove('access_token');
-              this.nav.push(LoginPage);
+              this.nav.setRoot(LoginPage);
             } else {
               alert(res)
             }
           }, (error) => {
             console.log(error);
           });
+        }
       }
-    }
     )
   }
 }
