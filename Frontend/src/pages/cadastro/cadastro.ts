@@ -6,8 +6,7 @@ import 'rxjs/add/operator/map'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CadastroService } from '../../services/cadastro.service';
 import { ToastController } from 'ionic-angular';
-
-
+import { ToastService } from '../../services/toast.service';
 @IonicPage()
 @Component({
   selector: 'page-cadastro',
@@ -24,9 +23,8 @@ export class CadastroPage {
     public cadastroService: CadastroService,
     public nav: NavController,
     public http: Http,
-    public toastCtrl: ToastController,
+    public toastService: ToastService
   ) {
-
     //Validação dos dados do Formulario
     this.authForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -41,20 +39,7 @@ export class CadastroPage {
     console.log('ionViewDidLoad CadastroPage');
   }
 
-  //Exibe mensagem cadastrado com sucesso se não houver erro
-  presentToast() {
-    let toast = this.toastCtrl.create({
-      message: 'Cadastrado com sucesso',
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-    toast.present();
-  }
-
-  //Envia os dados para o services/cadastro.service
+  //Envia os dados do formulario para o service cadastro
   cadastrar(): void {
     let data = {
       nome: this.authForm.value.nome,
@@ -63,12 +48,14 @@ export class CadastroPage {
       telefone: this.authForm.value.telefone
     }
 
-
+    //console.log("asdasd", data);
+    
     this.cadastroService.cadastrar(data).then(res => {
       if (res.Error != undefined) {
         console.log('Erro!');
       } else {
-        this.presentToast();
+        //Exbibe mensagem para usuário
+        this.toastService.presentToast('Cadastrado com sucesso!');
         this.navCtrl.pop();
       }
     }).catch(error => {

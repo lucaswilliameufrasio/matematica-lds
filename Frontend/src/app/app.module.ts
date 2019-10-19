@@ -22,6 +22,8 @@ import { CadastroService } from '../services/cadastro.service';
 import { LoginService } from '../services/login.service';
 import { BrMaskerModule } from 'br-mask';
 import { LogoutService } from '../services/logout.service';
+import { ToastService } from '../services/toast.service';
+
 
 
 export function jwtOptionsFactory(storage) {
@@ -79,6 +81,7 @@ export function jwtOptionsFactory(storage) {
     LogoutService,
     StatusBar,
     SplashScreen,
+    ToastService,
     SocialSharing,
     NativeAudio,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

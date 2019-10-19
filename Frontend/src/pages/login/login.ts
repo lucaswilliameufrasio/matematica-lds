@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { AberturaPage } from '../abertura/abertura';
 
 @IonicPage()
 @Component({
@@ -70,6 +71,10 @@ export class LoginPage {
 
   goToCadastro() {
     this.nav.push(CadastroPage);
+  }
+
+  goToHome() {
+    this.navCtrl.setRoot(AberturaPage);
   }
 
 }
