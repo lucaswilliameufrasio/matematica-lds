@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { HomePage } from '../home/home';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CadastroService } from '../../services/cadastro.service';
+import { ToastController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
@@ -12,43 +15,65 @@ import 'rxjs/add/operator/map'
 })
 export class CadastroPage {
 
-  nome: string = '';
-  email: string = '';
-  senha: string = '';
-  telefone: string = '';
+  //Recebe o grupo de formulario
+  authForm: FormGroup;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public cadastroService: CadastroService,
     public nav: NavController,
-    public http: HttpClient,
+    public http: Http,
+    public toastCtrl: ToastController,
   ) {
+
+    //Validação dos dados do Formulario
+    this.authForm = new FormGroup({
+      nome: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      senha: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+      telefone: new FormControl('', Validators.required)
+    });
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CadastroPage');
   }
 
-  cadastrar() {
-    alert(this.nome + this.email + this.senha + this.telefone);
+  //Exibe mensagem cadastrado com sucesso se não houver erro
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Cadastrado com sucesso',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+  }
 
-    var api = 'http://127.0.0.1:8001';
-    var dados = JSON.stringify({ nome: this.nome, email: this.email, senha: this.senha, telefone: this.telefone });
+  //Envia os dados para o services/cadastro.service
+  cadastrar(): void {
+    let data = {
+      nome: this.authForm.value.nome,
+      email: this.authForm.value.email,
+      senha: this.authForm.value.senha,
+      telefone: this.authForm.value.telefone
+    }
 
-    this.http.post(api + '/auth/register', dados, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }),
-    })
-      .subscribe(res => {
-        console.log(res['data']);
-        alert("Cadastrado com sucesso.")
-        alert('Bem vindo, ' + res['data'].name);
-        this.nav.setRoot(HomePage);
-      }, (error) => {
-        console.log(error);
-      });
+
+    this.cadastroService.cadastrar(data).then(res => {
+      if (res.Error != undefined) {
+        console.log('Erro!');
+      } else {
+        this.presentToast();
+        this.navCtrl.pop();
+      }
+    }).catch(error => {
+      console.log("Dados invalidos");
+    });
   }
   goToLogin() {
     this.nav.push(LoginPage);

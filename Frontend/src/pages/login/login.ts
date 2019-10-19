@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { CadastroPage } from '../cadastro/cadastro';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
 
 @IonicPage()
 @Component({
@@ -12,46 +14,58 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 })
 export class LoginPage {
 
-  email: string = '';
-  senha: string = '';
+  authForm: FormGroup;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public loginService: LoginService,
     public nav: NavController,
     public http: HttpClient,
+    public toastCtrl: ToastController,
     private storage: Storage,
   ) {
+    this.authForm = new FormGroup({
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
+      password: new FormControl('', Validators.required),
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  goToHome() {
-    alert('Email: ' +this.email);
+  //Exibe mensagem de login com sucesso se não houver erro
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+    toast.present();
+  }
 
-    let api = 'http://127.0.0.1:8001';
-    let dados = JSON.stringify({ email: this.email, password: this.senha });
+  //Envia os dados para o services/login.service
+  fazerLogin(): void {
+    let data = {
+      email: this.authForm.value.email,
+      password: this.authForm.value.password
+    }
 
-    this.http.post(api + '/auth/login', dados, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }),
-    })
-      .subscribe(res => {
-        console.log(res);
-        if (res['success']) {
-          alert("Logado com sucesso.")
-          this.storage.set('access_token', res['access_token']);
-          this.nav.setRoot(HomePage);
-        } else {
-          alert("O email ou senha parecem estar errados.")
-        }
-      }, (error) => {
-        console.log(error);
-      });
+    this.loginService.login(data).then(res => {
+      if (res['success']) {
+        this.presentToast('Login efetuado com sucesso');
+        this.storage.set('access_token', res['access_token']);
+        this.nav.setRoot(HomePage);
+      } else {
+        this.presentToast('Email ou senha invalido');
+      }
+    }).catch(error => {
+      console.log('Não possivel fazer login');
+    });
   }
 
   goToCadastro() {

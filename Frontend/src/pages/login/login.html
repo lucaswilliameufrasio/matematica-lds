@@ -1,34 +1,70 @@
-<ion-content class="login_page" padding>
-  <form class="app_form">
-    <div class="logo">
-      Matemática!
-    </div>
-      <div class="list list-inset">
-          <label class="item item-input">
-              <ion-icon class="login" color="light" name="person"></ion-icon>
-              <input type="text" placeholder="Email" name="email"[(ngModel)]="email" required>
-          </label>
-          <label class="item item-input">
-              <ion-icon class="login" color="light" name="key"></ion-icon>
-              <input type="password" placeholder="Senha" name="senha" [(ngModel)]="senha" required>
-          </label>
-          <div class="row">
-            <div class="col">
-              <div (click)="goToHome()" class="button button-block main_btn">
-                Login
-              </div>
-            </div>
-            <div class="col">
-              <div (click)="goToCadastro()" class="button button-block">
-                Cadastrar
-              </div>
-            </div>
+<ion-content
+  class="login_page"
+  padding
+>
+  <form
+    class="app_form"
+    [formGroup]="authForm"
+  >
+    <div class="logo">Matemática!</div>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <ion-icon
+          class="login"
+          color="light"
+          name="person"
+        ></ion-icon>
+        <input
+          type="text"
+          placeholder="Email"
+          name="email"
+          formControlName="email"
+          required
+        >
+      </label>
+      <label class="item item-input">
+        <ion-icon
+          class="login"
+          color="light"
+          name="key"
+        ></ion-icon>
+        <input
+          type="password"
+          placeholder="Senha"
+          name="password"
+          formControlName="password"
+          required
+        >
+      </label>
+      <div class="row">
+        <div class="col">
+          <div
+            type="submit"
+            class="button button-block main_btn"
+            (click)="fazerLogin()"
+          >
+            Login
           </div>
-         <div class="row skip_forget">
-           <div class="col">
-              <a class="button button-clear forgot" ng-click="forget_password()">Esqueci minha senha</a>
-           </div>
+        </div>
+        <div class="col">
+          <div
+            (click)="goToCadastro()"
+            class="button button-block"
+          >
+            Cadastrar
+          </div>
+        </div>
       </div>
+      <div class="row skip_forget">
+        <div class="col">
+          <a
+            class="button button-clear forgot"
+            ng-click="forget_password()"
+          >
+            Esqueci minha senha
+          </a>
+        </div>
       </div>
+    </div>
   </form>
 </ion-content>

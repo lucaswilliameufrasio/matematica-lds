@@ -12,16 +12,20 @@ import { MenuPage } from '../pages/menu/menu';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { CalculadoraTdahPage } from '../pages/calculadora-tdah/calculadora-tdah';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
 import { AberturaPage } from '../pages/abertura/abertura';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { EnvironmentEnvironmentProvider } from '../providers/environment-environment/environment-environment';
-import { EnvironmentProvider } from '../providers/environment/environment';
+import { CadastroService } from '../services/cadastro.service';
+import { LoginService } from '../services/login.service';
+import { BrMaskerModule } from 'br-mask';
+import { LogoutService } from '../services/logout.service';
+
 
 export function jwtOptionsFactory(storage) {
-  
+
   return {
     tokenGetter: () => {
       return storage.get('access_token');
@@ -44,8 +48,10 @@ export function jwtOptionsFactory(storage) {
   ],
   imports: [
     BrowserModule,
+    BrMaskerModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    HttpModule,
     IonicStorageModule.forRoot(),
     JwtModule.forRoot({
       jwtOptionsProvider: {
@@ -68,13 +74,14 @@ export function jwtOptionsFactory(storage) {
     CalculadoraTdahPage,
   ],
   providers: [
+    CadastroService,
+    LoginService,
+    LogoutService,
     StatusBar,
     SplashScreen,
     SocialSharing,
     NativeAudio,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    EnvironmentEnvironmentProvider,
-    EnvironmentProvider,
   ]
 })
 export class AppModule { }

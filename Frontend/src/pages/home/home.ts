@@ -75,7 +75,7 @@ export class HomePage {
         console.log(token);
         console.log(headers);
 
-        this.http.post(api + '/auth/logout', {},{
+        this.http.post(api + '/auth/logout', {
           headers: headers,
         })
           .subscribe(res => {

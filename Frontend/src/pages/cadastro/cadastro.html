@@ -1,41 +1,84 @@
-<ion-content class="login_page register_page" padding>
-  <form class="app_form">
-    <div class="logo">
-      Matemática!
-    </div>
-      <div class="list list-inset">
-          <label class="item item-input">
-              <i class="icon ion-android-person placeholder-icon"></i>
-              <input type="text" placeholder="Nome" name="nome"[(ngModel)]="nome" required>
-          </label>
-           <label class="item item-input">
-              <i class="icon ion-email placeholder-icon"></i>
-              <input type="email" placeholder="E-mail" name="email" [(ngModel)]="email" required>
-          </label>
-           <label class="item item-input">
-              <i class="icon ion-locked placeholder-icon"></i>
-              <input type="password" placeholder="Senha" name="senha" [(ngModel)]="senha" required>
-          </label> 
-          <label class="item item-input">
-              <i class="icon ion-locked placeholder-icon"></i>
-              <input type="password" placeholder="Confirmar Senha" required>
-          </label>
-           <label class="item item-input">
-              <i class="icon ion-ipad placeholder-icon"></i>
-              <input type="tel" placeholder="Telefone" name="telefone" [(ngModel)]="telefone" required>
-          </label>
-          <div class="row">
-            <div class="col">
-              <a (click)="cadastrar()" class="button button-block main_btn">
-                 Entrar
-              </a>
-            </div>
-            <div class="col">
-              <a (click)="goToLogin()" class="button button-block">
-                Voltar
-              </a>
-            </div>
-          </div>
+<ion-content
+  class="login_page register_page"
+  padding
+>
+  <form
+    [formGroup]="authForm"
+    (ngSubmit)="cadastrar()"
+  >
+    <div class="logo">Matemática!</div>
+    <div class="list list-inset">
+
+      <label class="item item-input">
+        <i class="icon ion-android-person placeholder-icon"></i>
+        <input
+          type="text"
+          placeholder="Nome"
+          name="nome"
+          formControlName="nome"
+        >
+      </label>
+
+      <label class="item item-input">
+        <i class="icon ion-email placeholder-icon"></i>
+        <input
+          type="email"
+          placeholder="E-mail"
+          name="email"
+          formControlName="email"
+        >
+      </label>
+
+      <label class="item item-input">
+        <i class="icon ion-locked placeholder-icon"></i>
+        <input
+          type="password"
+          placeholder="Senha"
+          name="senha"
+          formControlName="senha"
+          required
+        >
+      </label>
+
+      <label class="item item-input">
+        <i class="icon ion-locked placeholder-icon"></i>
+        <input
+          type="password"
+          placeholder="Confirmar Senha"
+        >
+      </label>
+
+      <label class="item item-input">
+        <i class="icon ion-ipad placeholder-icon"></i>
+        <input
+          type="text"
+          [brmasker]="{mask:'(99) 9999-9999', len:14}"
+          placeholder="Telefone"
+          name="telefone"
+          formControlName="telefone"
+          required
+        >
+      </label>
+
+      <div class="row">
+        <button
+          ion-button
+          block
+          type="submit"
+          [disabled]="!authForm.valid"
+        >
+          Entrar
+        </button>
       </div>
+    </div>
   </form>
+
+  <button
+    ion-button
+    block
+    (click)="goToLogin()"
+  >
+    Voltar
+  </button>
+
 </ion-content>
