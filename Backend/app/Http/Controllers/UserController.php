@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,13 +14,13 @@ class UserController extends Controller
             'nome' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'senha' => 'required|string',
-            'telefone' => 'required|min:14|regex:/^\(\d{2}\)\s\d{4}-\d{4}$/',
+            'telefone' => 'required|min:14|regex:/^\(\d{2}\)\s\d{5}-\d{4}$/',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
         }
-        
+
         $usuario = User::create([
             'name' => $request->nome,
             'email' => $request->email,
@@ -32,7 +32,7 @@ class UserController extends Controller
         ], 200,
             ['Content-type' => 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
-    
+
     /**
      * Retorna o Usuário autenticado.
      *
