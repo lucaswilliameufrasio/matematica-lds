@@ -33,7 +33,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  
   }
 
   //Exibe mensagem de login com sucesso se não houver erro
@@ -49,16 +49,16 @@ export class LoginPage {
     toast.present();
   }
 
-  //Envia os dados para o services/login.service
+  // Envia os dados para o services/login.service
   fazerLogin(): void {
     let data = {
       email: this.authForm.value.email,
       password: this.authForm.value.password
     }
-
     this.loginService.login(data).then(res => {
       if (res['success']) {
         this.presentToast('Login efetuado com sucesso');
+        localStorage.setItem('token', res['access_token']);
         this.storage.set('access_token', res['access_token']);
         this.nav.setRoot(HomePage);
       } else {
@@ -69,10 +69,12 @@ export class LoginPage {
     });
   }
 
+  //Redireciona para a pagina de Cadastro
   goToCadastro() {
     this.nav.push(CadastroPage);
   }
 
+  // Retorna a pagina de abertura
   goToHome() {
     this.navCtrl.setRoot(AberturaPage);
   }

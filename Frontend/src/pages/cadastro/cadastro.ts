@@ -25,6 +25,7 @@ export class CadastroPage {
     public http: Http,
     public toastService: ToastService
   ) {
+    
     //Validação dos dados do Formulario
     this.authForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -36,7 +37,7 @@ export class CadastroPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroPage');
+  
   }
 
   //Envia os dados do formulario para o service cadastro
@@ -47,9 +48,7 @@ export class CadastroPage {
       senha: this.authForm.value.senha,
       telefone: this.authForm.value.telefone
     }
-
-    //console.log("asdasd", data);
-    
+        
     this.cadastroService.cadastrar(data).then(res => {
       if (res.Error != undefined) {
         console.log('Erro!');
@@ -59,9 +58,11 @@ export class CadastroPage {
         this.navCtrl.pop();
       }
     }).catch(error => {
-      console.log("Dados invalidos");
+      this.toastService.presentToast('Dados invalidos!');
     });
   }
+
+  //Redireciona para a pagina de login
   goToLogin() {
     this.nav.push(LoginPage);
   }

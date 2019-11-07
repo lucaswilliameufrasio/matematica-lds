@@ -19,6 +19,7 @@ export class LoginService {
     return this.http.post(this.api + '/auth/login', date).toPromise().then(response => response.json())
       .catch(this.handleError);
   }
+  
   //Exibe mensagem de erro caso no console
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
