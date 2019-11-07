@@ -6,7 +6,7 @@ import { ToastController } from 'ionic-angular';
 export class ToastService {
 
     /*
-       Classe CadastroService contem a função presentToast()..
+       Classe CadastroService contem a função presentToast().
        Esse serviso precisa ser importado no arquivo "TS" da pagina que será utilizado.
     */
 

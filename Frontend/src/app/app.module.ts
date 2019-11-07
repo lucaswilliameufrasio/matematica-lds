@@ -13,7 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { CalculadoraTdahPage } from '../pages/calculadora-tdah/calculadora-tdah';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
 import { AberturaPage } from '../pages/abertura/abertura';
 import { Storage, IonicStorageModule } from '@ionic/storage';
@@ -27,6 +27,7 @@ import { ToastService } from '../services/toast.service';
 
 import { PerfilPage } from '../pages/perfil/perfil';
 import { RankingPage } from '../pages/ranking/ranking';
+import { TokenInterceptor } from '../services/token-interceptor.service';
 
 export function jwtOptionsFactory(storage) {
 
@@ -90,6 +91,7 @@ export function jwtOptionsFactory(storage) {
     ToastService,
     SocialSharing,
     NativeAudio,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

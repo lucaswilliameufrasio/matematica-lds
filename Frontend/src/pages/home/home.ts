@@ -10,12 +10,15 @@ import { RankingPage} from '../ranking/ranking';
 
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LogoutService } from '../../services/logout.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
 
   pushCalculator: any;
   pushMenu: any;
@@ -26,11 +29,15 @@ export class HomePage {
   params_multiplication: Object;
   params_Division: Object;
   params_Exponentiation: Object;
+  //recebe a reposta da res 
+  messagemLogout: any;
 
   constructor(
     public navCtrl: NavController,
+    private logoutService: LogoutService,
     private socialSharing: SocialSharing,
     public nav: NavController,
+    private toast: ToastService,
     public http: HttpClient,
     private storage: Storage,
   ) {
@@ -45,6 +52,7 @@ export class HomePage {
     this.params_Exponentiation = { id: 5 };
   }
   ionViewDidLoad() {
+
     this.storage.get('access_token').then(val => {
       if (val != null) {
         console.log("Token armazenado : ", val)
@@ -61,46 +69,16 @@ export class HomePage {
     console.log('Open');
   }
 
-  shareSheetShare() {
-    this.socialSharing.share("Obrigado!", "Matemática!", "", "").then(() => {
-      console.log("Sucesso");
-    }).catch(() => {
-      console.error("Deu erro");
-    });
-  }
-
+  // Realiza o logout do usuário, remove o token do localStorage e retorna a pagina de login
   logout() {
-
-    let api = 'http://127.0.0.1:8001';
-
-    this.storage.get('access_token').then((token) => {
-      if (token != null) {
-        let headers = new HttpHeaders({
-          Authorization: `Bearer ${token}`,
-          'Accept': 'application/json'
-        });
-
-        console.log(token);
-        console.log(headers);
-
-        this.http.post(api + '/auth/logout', {
-          headers: headers,
-        })
-          .subscribe(res => {
-            console.log(res);
-            console.log(headers)
-            if (res['success']) {
-              alert("Saiu com sucesso.")
-              this.storage.remove('access_token');
-              this.nav.setRoot(LoginPage);
-            } else {
-              alert(res)
-            }
-          }, (error) => {
-            console.log(error);
-          });
-        }
+    this.logoutService.logout()
+    .subscribe(res => {
+      this.messagemLogout = JSON.parse(res['_body']);
+      if(this.messagemLogout.success === false){
+        this.toast.presentToast("Até logo")
+        this.storage.remove('access_token')
+        this.navCtrl.setRoot(LoginPage) 
       }
-    )
+    })
   }
 }
