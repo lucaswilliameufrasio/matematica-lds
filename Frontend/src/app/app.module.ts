@@ -18,7 +18,7 @@ import { HomeTDAHPage } from '../pages/home_tdah/home_tdah';
 import { AberturaPage } from '../pages/abertura/abertura';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { CadastroService } from '../services/cadastro.service';
+import { RegisterService } from '../services/register.service';
 import { LoginService } from '../services/login.service';
 import { BrMaskerModule } from 'br-mask';
 import { LogoutService } from '../services/logout.service';
@@ -27,7 +27,9 @@ import { ToastService } from '../services/toast.service';
 
 import { PerfilPage } from '../pages/perfil/perfil';
 import { RankingPage } from '../pages/ranking/ranking';
-import { TokenInterceptor } from '../services/token-interceptor.service';
+import { VerifyTokenService } from '../services/verifyToken.service';
+import { InterceptorTokenProvider } from '../providers/interceptor-token/interceptor-token';
+import { LoadingService } from '../services/loading.service';
 
 export function jwtOptionsFactory(storage) {
 
@@ -83,15 +85,17 @@ export function jwtOptionsFactory(storage) {
     RankingPage,
   ],
   providers: [
-    CadastroService,
+    RegisterService,
     LoginService,
     LogoutService,
+    LoadingService,
     StatusBar,
     SplashScreen,
     ToastService,
+    VerifyTokenService,
     SocialSharing,
     NativeAudio,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorTokenProvider, multi: true },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
   ]
 })

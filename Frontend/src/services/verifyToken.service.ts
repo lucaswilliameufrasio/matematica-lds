@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
-export class LogoutService {
+export class VerifyTokenService {
 
   /*
-     Classe CadastroService contem a função logout().
+     Classe CadastroService contem a função verifyToken().
      Esse serviso precisa ser importado no arquivo "TS" da pagina que será utilizado.
   */
 
@@ -18,13 +18,22 @@ export class LogoutService {
 
   constructor(public http: HttpClient) { }
 
-  //Envia um metodo post para função na API invalidado o token
-  logout():Observable<any>{
-    return this.http.post(this.api + '/auth/logout', null)
+  //Envia um metodo post para função para a API, retona o estado do token 
+  verifyToken():Observable<any>{
+      return this.http.post(this.api + '/auth/me', {})
+      .pipe(
+          catchError(this.handleError)
+          )
+        }
+        
+  //Envia um metodo post para função para a API, retona o token atualizado 
+  refreshToken():Observable<any>{
+    return this.http.post(this.api + '/auth/refresh', {})
     .pipe(
       catchError(this.handleError)
     )
   }
+
   //Exibe mensagem de erro caso no console
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);

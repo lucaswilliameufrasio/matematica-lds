@@ -7,6 +7,7 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { AberturaPage } from '../abertura/abertura';
+import { LoadingService } from '../../services/loading.service';
 
 @IonicPage()
 @Component({
@@ -21,6 +22,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loginService: LoginService,
+    public loadingService: LoadingService,
     public nav: NavController,
     public http: HttpClient,
     public toastCtrl: ToastController,
@@ -56,6 +58,7 @@ export class LoginPage {
       password: this.authForm.value.password
     }
     this.loginService.login(data).then(res => {
+      this.loadingService.presentWithGif();
       if (res['success']) {
         this.presentToast('Login efetuado com sucesso');
         localStorage.setItem('token', res['access_token']);
@@ -64,6 +67,7 @@ export class LoginPage {
       } else {
         this.presentToast('Email ou senha invalido');
       }
+      this.loadingService.dismiss()
     }).catch(error => {
       console.log('Não possivel fazer login');
     });

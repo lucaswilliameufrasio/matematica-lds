@@ -12,6 +12,7 @@ import { Storage, IonicStorageModule } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogoutService } from '../../services/logout.service';
 import { ToastService } from '../../services/toast.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'page-home',
@@ -35,9 +36,9 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     private logoutService: LogoutService,
-    private socialSharing: SocialSharing,
     public nav: NavController,
     private toast: ToastService,
+    private loadingService: LoadingService,
     public http: HttpClient,
     private storage: Storage,
   ) {
@@ -70,15 +71,21 @@ export class HomePage {
   }
 
   // Realiza o logout do usuário, remove o token do localStorage e retorna a pagina de login
+  
   logout() {
     this.logoutService.logout()
+
     .subscribe(res => {
-      this.messagemLogout = JSON.parse(res['_body']);
-      if(this.messagemLogout.success === false){
-        this.toast.presentToast("Até logo")
+      this.loadingService.presentWithGif()
+      this.messagemLogout = res;
+      if(this.messagemLogout.success === true){
         this.storage.remove('access_token')
+        this.toast.presentToast("Até logo")
         this.navCtrl.setRoot(LoginPage) 
+      } else {
+        this.toast.presentToast("Ops! algo deu errado tente novamente")
       }
+      this.loadingService.dismiss()
     })
   }
 }

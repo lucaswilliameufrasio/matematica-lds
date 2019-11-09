@@ -4,8 +4,7 @@ import { LoginPage } from '../login/login';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CadastroService } from '../../services/cadastro.service';
-import { ToastController } from 'ionic-angular';
+import { RegisterService } from '../../services/register.service';
 import { ToastService } from '../../services/toast.service';
 @IonicPage()
 @Component({
@@ -20,12 +19,12 @@ export class CadastroPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public cadastroService: CadastroService,
+    public registerService: RegisterService,
     public nav: NavController,
     public http: Http,
     public toastService: ToastService
   ) {
-    
+
     //Validação dos dados do Formulario
     this.authForm = new FormGroup({
       nome: new FormControl('', Validators.required),
@@ -37,7 +36,7 @@ export class CadastroPage {
   }
 
   ionViewDidLoad() {
-  
+
   }
 
   //Envia os dados do formulario para o service cadastro
@@ -48,15 +47,13 @@ export class CadastroPage {
       senha: this.authForm.value.senha,
       telefone: this.authForm.value.telefone
     }
-        
-    this.cadastroService.cadastrar(data).then(res => {
-      if (res.Error != undefined) {
-        console.log('Erro!');
-      } else {
-        //Exbibe mensagem para usuário
-        this.toastService.presentToast('Cadastrado com sucesso!');
-        this.navCtrl.pop();
-      }
+
+    console.log(data);
+
+    this.registerService.register(data).then(res => {
+      //Exbibe mensagem para usuário
+      this.toastService.presentToast('Cadastrado com sucesso!');
+      this.navCtrl.pop();
     }).catch(error => {
       this.toastService.presentToast('Dados invalidos!');
     });
