@@ -13,11 +13,12 @@ export class ToastService {
     constructor(public toastCtrl: ToastController) { }
 
     //Função controladora de exbição de mensagens de avisos para o usuário
-    presentToast(message) {
+    presentToast(message, css) {
         let toast = this.toastCtrl.create({
             message: message,
             duration: 3000,
-            position: 'bottom'
+            position: 'bottom',
+            cssClass: css,
         });
         toast.onDidDismiss(() => {
             console.log('Dismissed toast');
