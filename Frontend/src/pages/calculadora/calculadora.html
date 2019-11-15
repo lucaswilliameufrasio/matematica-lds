@@ -1,102 +1,221 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title *ngIf="Selected_Operation.id == 1">Adição</ion-title>
-		<ion-title *ngIf="Selected_Operation.id == 2">Subtração</ion-title>
-		<ion-title *ngIf="Selected_Operation.id == 3">Multiplicação</ion-title>
-		<ion-title *ngIf="Selected_Operation.id == 4">Divisão</ion-title>
-		<ion-title *ngIf="Selected_Operation.id == 5">Exponenciação</ion-title>
-	</ion-navbar>
+  <ion-navbar>
+    <ion-title *ngIf="Selected_Operation.id == 1">Adição</ion-title>
+    <ion-title *ngIf="Selected_Operation.id == 2">Subtração</ion-title>
+    <ion-title *ngIf="Selected_Operation.id == 3">Multiplicação</ion-title>
+    <ion-title *ngIf="Selected_Operation.id == 4">Divisão</ion-title>
+    <ion-title *ngIf="Selected_Operation.id == 5">Exponenciação</ion-title>
+  </ion-navbar>
 </ion-header>
 
-<ion-content padding class="login_page">
-	<ion-grid>
-		<ion-row>
-			<ion-col width-25>
-				<ion-grid>
-					<ion-row>
-						<div class="acertos">
-							<ion-col>
-								<ion-icon class="erro" name="heart"></ion-icon>
-							</ion-col>
-							<ion-col>
-								<ion-icon class="vidas" name="heart"></ion-icon>
-							</ion-col>
-							<ion-col>
-								<ion-icon class="vidas" name="heart"></ion-icon>
-							</ion-col>
-						</div>
-					</ion-row>
-					<ion-row class="tempo">
-						<p *ngIf="hidevalue==false"> {{maxtime}}</p>
-					</ion-row>
-				</ion-grid>
-			</ion-col>
-			<ion-col width-75>
-				<div class="pontostit">Pontuação</div>
-				<div class="pontos">
-					000100
-				</div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+<ion-content
+  padding
+  class="login_page"
+>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-25>
+        <ion-grid>
+          <ion-row>
+            <div class="acertos">
+              <ion-col>
 
-	<ion-grid>
-		<ion-row>
-			<ion-col class="Column_title operacao" text-center>
-				{{Number1}}
-				<ion-icon class="op" *ngIf="Selected_Operation.id == 1">&nbsp;+&nbsp;</ion-icon>
-				<ion-icon class="op" *ngIf="Selected_Operation.id == 2">&nbsp;-&nbsp;</ion-icon>
-				<ion-icon class="op" *ngIf="Selected_Operation.id == 3">&nbsp;x&nbsp;</ion-icon>
-				<ion-icon class="op" *ngIf="Selected_Operation.id == 4">&nbsp;/&nbsp;</ion-icon>
-				<ion-icon class="op" *ngIf="Selected_Operation.id == 5">&nbsp;^&nbsp;</ion-icon>
-				{{Number2}}
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="Columns_Numbers" text-center>
-				<ion-buttons (click)="Selection(Value_Position1,'1')" id="1">
-					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor1}">
-						{{Value_Position1}}
-					</button>
-				</ion-buttons>
-			</ion-col>
-			<ion-col class="Columns_Numbers" text-center>
-				<ion-buttons (click)="Selection(Value_Position2,'2')" id="2">
-					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor2}">
-						{{Value_Position2}}
-					</button>
-				</ion-buttons>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="Columns_Numbers" text-center>
-				<ion-buttons (click)="Selection(Value_Position3,'3')" id="3">
-					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor3}">
-						{{Value_Position3}}
-					</button>
-				</ion-buttons>
-			</ion-col>
-			<ion-col class="Columns_Numbers" text-center>
-				<ion-buttons (click)="Selection(Value_Position4,'4')" id="4">
-					<button class="Button_Share" ion-button [ngStyle]="{'background-color': buttonColor4}">
-						{{Value_Position4}}
-					</button>
-				</ion-buttons>
-			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col class="Columns_Numbers" text-center>
-				<ion-buttons (click)="onButtonClick()" id="3">
-					<button class="Button_Share vol" ion-button>
-						<ion-icon *ngIf="buttonClicked" name="volume-up"></ion-icon>
-						<ion-icon *ngIf="!buttonClicked" name="volume-off"></ion-icon>
-					</button>
-				</ion-buttons>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+                <ion-icon
+                  *ngIf="tentativa1 === false"
+                  class="vidas"
+                  name="heart"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="tentativa1 === true"
+                  class="erro"
+                  name="heart"
+                ></ion-icon>
+              </ion-col>
 
-	<!-- <ion-item>
+              <ion-col>
+                <ion-icon
+                  *ngIf="tentativa2 === false"
+                  class="vidas"
+                  name="heart"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="tentativa2 === true"
+                  class="erro"
+                  name="heart"
+                ></ion-icon>
+              </ion-col>
+
+              <ion-col>
+                <ion-icon
+                  *ngIf="tentativa3 === false"
+                  class="vidas"
+                  name="heart"
+                ></ion-icon>
+                <ion-icon
+                  *ngIf="tentativa3 === true"
+                  class="erro"
+                  name="heart"
+                ></ion-icon>
+              </ion-col>
+
+            </div>
+          </ion-row>
+          <ion-row class="tempo">
+            <p *ngIf="hidevalue==false">{{maxtime}}</p>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+      <ion-col width-75>
+        <div class="pontostit">Pontuação</div>
+        <div class="pontos">{{pontuacao}}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col
+        class="Column_title operacao"
+        text-center
+      >
+        {{Number1}}
+        <ion-icon
+          class="op"
+          *ngIf="Selected_Operation.id == 1"
+        >
+          &nbsp;+&nbsp;
+        </ion-icon>
+        <ion-icon
+          class="op"
+          *ngIf="Selected_Operation.id == 2"
+        >
+          &nbsp;-&nbsp;
+        </ion-icon>
+        <ion-icon
+          class="op"
+          *ngIf="Selected_Operation.id == 3"
+        >
+          &nbsp;x&nbsp;
+        </ion-icon>
+        <ion-icon
+          class="op"
+          *ngIf="Selected_Operation.id == 4"
+        >
+          &nbsp;/&nbsp;
+        </ion-icon>
+        <ion-icon
+          class="op"
+          *ngIf="Selected_Operation.id == 5"
+        >
+          &nbsp;^&nbsp;
+        </ion-icon>
+        {{Number2}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        class="Columns_Numbers"
+        text-center
+      >
+        <ion-buttons
+          (click)="Selection(Value_Position1,'1')"
+          id="1"
+        >
+          <button
+            [disabled]="disabilitar"
+            class="Button_Share"
+            ion-button
+            [ngStyle]="{'background-color': buttonColor1}"
+          >
+            {{Value_Position1}}
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col
+        class="Columns_Numbers"
+        text-center
+      >
+        <ion-buttons
+          (click)="Selection(Value_Position2,'2')"
+          id="2"
+        >
+          <button
+            [disabled]="disabilitar"
+            class="Button_Share"
+            ion-button
+            [ngStyle]="{'background-color': buttonColor2}"
+          >
+            {{Value_Position2}}
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        class="Columns_Numbers"
+        text-center
+      >
+        <ion-buttons
+          (click)="Selection(Value_Position3,'3')"
+          id="3"
+        >
+          <button
+            [disabled]="disabilitar"
+            class="Button_Share"
+            ion-button
+            [ngStyle]="{'background-color': buttonColor3}"
+          >
+            {{Value_Position3}}
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col
+        class="Columns_Numbers"
+        text-center
+      >
+        <ion-buttons
+          (click)="Selection(Value_Position4,'4')"
+          id="4"
+        >
+          <button
+            [disabled]="disabilitar"
+            class="Button_Share"
+            ion-button
+            [ngStyle]="{'background-color': buttonColor4}"
+          >
+            {{Value_Position4}}
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        class="Columns_Numbers"
+        text-center
+      >
+        <ion-buttons
+          (click)="onButtonClick()"
+          id="3"
+        >
+          <button
+            class="Button_Share vol"
+            ion-button
+          >
+            <ion-icon
+              *ngIf="buttonClicked"
+              name="volume-up"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="!buttonClicked"
+              name="volume-off"
+            ></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-item>
 		<ion-input [(ngModel)]="inputtext" placeholder="type"></ion-input>
 	</ion-item>
 	<button ion-button (click)="saveData()">salvar</button>

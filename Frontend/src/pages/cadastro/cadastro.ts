@@ -52,10 +52,10 @@ export class CadastroPage {
 
     this.registerService.register(data).then(res => {
       //Exbibe mensagem para usuário
-      this.toastService.presentToast('Cadastrado com sucesso!');
+      this.toastService.presentToast('Cadastrado com sucesso!', "");
       this.navCtrl.pop();
     }).catch(error => {
-      this.toastService.presentToast('Dados invalidos!');
+      this.toastService.presentToast('Dados invalidos!', "");
     });
   }
 

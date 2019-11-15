@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { SocialSharing } from '@ionic-native/social-sharing';
 import { CalculadoraPage } from '../calculadora/calculadora';
 
 import { MenuPage } from '../menu/menu';
@@ -30,7 +29,7 @@ export class HomePage {
   params_multiplication: Object;
   params_Division: Object;
   params_Exponentiation: Object;
-  //recebe a reposta da res 
+  //recebe a reposta da res
   messagemLogout: any;
 
   constructor(
@@ -68,10 +67,10 @@ export class HomePage {
       this.messagemLogout = res;
       if(this.messagemLogout.success === true){
         this.storage.remove('access_token')
-        this.toast.presentToast("Até logo")
-        this.navCtrl.setRoot(LoginPage) 
+        this.toast.presentToast("Até logo", "")
+        this.navCtrl.setRoot(LoginPage)
       } else {
-        this.toast.presentToast("Ops! algo deu errado tente novamente")
+        this.toast.presentToast("Ops! algo deu errado tente novamente", "")
       }
       this.loadingService.dismiss()
     })
