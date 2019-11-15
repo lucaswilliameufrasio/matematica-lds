@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
@@ -31,13 +31,17 @@ export class CalculadoraPage {
 	valor: any;
 	click1: any;
 
+	maxtime: any = 30;
+	hidevalue;
+	timer;
+
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
 		public platform: Platform,
 		private nativeAudio: NativeAudio,
 		public toastCtrl: ToastController,
-		) {
+	) {
 
 		this.platform.ready().then(() => {
 			this.nativeAudio.preloadSimple('uniqueId1', 'assets/audio/zapsplat_cartoon_ascend_slide_whistle_float_up_18047.mp3').then((success) => {
@@ -112,15 +116,44 @@ export class CalculadoraPage {
 	}
 
 	ionViewDidLoad() {
+
+		this.StartTimer()
+	}
+
+	StartTimer() {
+
+		this.timer = setTimeout(x => {
+
+			if (this.maxtime <= 0) {
+				this.changeNumber(this.valor, this.click1);
+				this.maxtime = 30; 
+			}
+
+			this.maxtime -= 1;
+
+			if (this.maxtime >= 0) {
+				this.hidevalue = false;
+				this.StartTimer();
+			}
+
+			else {
+				this.hidevalue = true;
+			}
+
+		}, 1000);
+
 	}
 
 	acerto() {
 		let toast = this.toastCtrl.create({
-		  message: 'Resposta Correta!',
-		  duration: 2000,
-		  position: 'bottom'
+			message: 'Resposta Correta!',
+			duration: 2000,
+			position: 'bottom'
 		});
 		toast.onDidDismiss(() => {
+			const timer = this.maxtime;
+			this.maxtime = 30;
+			console.log("tempo de acerto: ", timer);
 			this.changeNumber(this.valor, this.click1);
 		});
 		toast.present(toast);
@@ -161,7 +194,7 @@ export class CalculadoraPage {
 				this.buttonColor4 = '#70e733';
 			}
 
-			
+
 		}
 		//Se a resposta estiver incorreta, faça...
 		else {
@@ -319,16 +352,16 @@ export class CalculadoraPage {
 		this.buttonColor4 = '#fff9ff';
 	}
 
-	backToWhite(){
+	backToWhite() {
 		this.buttonColor1 = '#fff9ff';
 		this.buttonColor2 = '#fff9ff';
 		this.buttonColor3 = '#fff9ff';
-		this.buttonColor4 = '#fff9ff';	
+		this.buttonColor4 = '#fff9ff';
 	}
-	
+
 	onButtonClick() {
 		this.buttonClicked = !this.buttonClicked;
 	}
 
-	
+
 }

@@ -53,17 +53,6 @@ export class HomePage {
     this.params_Exponentiation = { id: 5 };
   }
   ionViewDidLoad() {
-
-    this.storage.get('access_token').then(val => {
-      if (val != null) {
-        console.log("Token armazenado : ", val)
-      }
-      else {
-        console.log("Valor nulo ou indefinido:", val)
-      }
-    }, err => {
-      console.log("Erro no Storage : ", err)
-    })
   }
 
   openCalculadora() {
@@ -71,7 +60,6 @@ export class HomePage {
   }
 
   // Realiza o logout do usuário, remove o token do localStorage e retorna a pagina de login
-  
   logout() {
     this.logoutService.logout()
 
