@@ -11,8 +11,8 @@ export class LoadingService {
         this.loading = this.loadingCtrl.create({
             spinner: 'hide',
             content: `
-          <div class="custom-spinner-container">
-            <img class="loading" width="120px" height="120px" src="assets/loader1.gif" />
+          <div>
+            <img width="80" src="assets/loader2.gif" />
           </div>`
         });
         

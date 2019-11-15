@@ -18,16 +18,27 @@
 
 <ion-content padding class="login_page">
 
-	<ion-buttons start>
-		<button ion-button primary icon-only [navPush]="gotoProfile">
-			<ion-icon name="ios-person">Perfil</ion-icon>
-		</button>
-	</ion-buttons>
-	<ion-buttons start>
-		<button ion-button primary icon-only [navPush]="gotoRanking">
-			<ion-icon name="trophy">Ranking</ion-icon>
-		</button>
-	</ion-buttons>
+	<ion-grid>
+		<ion-row class="row2">
+			<ion-col class="columns_perfil" [navPush]="gotoProfile" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_perfil">
+						<ion-icon name="ios-person"></ion-icon>
+						&nbsp;&nbsp;Perfil
+					</button>
+				</ion-buttons>
+			</ion-col>
+
+			<ion-col class="columns_perfil" [navPush]="gotoRanking" text-center>
+				<ion-buttons start>
+					<button ion-button class="buttons_ranking">
+						<ion-icon name="trophy"></ion-icon>
+						&nbsp;&nbsp; Ranking
+					</button>
+				</ion-buttons>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
 
 	<ion-grid>
 		<ion-row class="row">

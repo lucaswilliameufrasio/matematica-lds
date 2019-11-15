@@ -5,6 +5,14 @@ page-home {
     padding:20px;
     margin:0
   }
+
+  .perfil_btn {
+    float: left;
+  }
+
+  .perfil_btn {
+    float: right;
+  }
   
   .toolbar-title {
     color: white;
@@ -49,6 +57,40 @@ page-home {
     font-size: 1.8em;
     font-weight: 500;
     background-color: #92428b;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-transform: none;
+  }
+
+  .columns_perfil {
+    background: #425092;
+    border-radius: 12px;
+    padding: 3%;
+    font-size: .8em;
+    font-weight: 500;
+    color: white;
+    padding: 5px 0 4px 0;
+    max-width: 50%;
+    margin: 0 5px;
+  }
+
+  .buttons_perfil {
+    width: 100%;
+    height: 100%;
+    font-size: 1.8em;
+    font-weight: 500;
+    background-color: #425092;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-transform: none;
+  }
+
+  .buttons_ranking {
+    width: 100%;
+    height: 100%;
+    font-size: 1.8em;
+    font-weight: 500;
+    background-color: #425092;
     -webkit-box-shadow: none;
     box-shadow: none;
     text-transform: none;
@@ -168,6 +210,11 @@ page-home {
   .row {
     justify-content: center;
     margin-bottom: 6%;
+  }
+
+  .row2 {
+    justify-content: center;
+    margin-bottom: 0%;
   }
 
   .Content {
