@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map'
 import { environment } from '../environment/environment';
@@ -14,10 +14,13 @@ export class QuestionsService {
 
   api: string = environment.server;  //recebe a url da API de environment
 
-  constructor(public http: Http) { }
-  //Envia um metedo get para função na API que retorna os valores das questões
-  questions(): Observable<any> {
-    return this.http.get(this.api + '')
+  constructor(public http: HttpClient) { }
+  //Envia um metedo post para função na API que retorna os valores das questões
+  questions(operation): Observable<any> {
+    const dados = {
+      operation: operation
+    }
+    return this.http.post(this.api + '/getMathProblem', dados)
       .pipe()
       .catch(this.handleError);
   }
