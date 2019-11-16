@@ -30,7 +30,7 @@ export class CadastroPage {
       nome: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
       senha: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
-      telefone: new FormControl('', Validators.required)
+      // telefone: new FormControl('', Validators.required)
     });
 
   }
@@ -45,7 +45,7 @@ export class CadastroPage {
       nome: this.authForm.value.nome,
       email: this.authForm.value.email,
       senha: this.authForm.value.senha,
-      telefone: this.authForm.value.telefone
+      // telefone: this.authForm.value.telefone
     }
 
     console.log(data);
