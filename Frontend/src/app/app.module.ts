@@ -30,6 +30,7 @@ import { RankingPage } from '../pages/ranking/ranking';
 import { VerifyTokenService } from '../services/verifyToken.service';
 import { InterceptorTokenProvider } from '../providers/interceptor-token/interceptor-token';
 import { LoadingService } from '../services/loading.service';
+import { QuestionsService } from '../services/questions.service';
 
 export function jwtOptionsFactory(storage) {
 
@@ -91,6 +92,7 @@ export function jwtOptionsFactory(storage) {
     LoadingService,
     StatusBar,
     SplashScreen,
+    QuestionsService,
     ToastService,
     VerifyTokenService,
     SocialSharing,

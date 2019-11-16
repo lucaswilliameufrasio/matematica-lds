@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
@@ -6,6 +6,7 @@ import { ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ToastService } from '../../services/toast.service';
 import { LoadingService } from '../../services/loading.service';
+import { QuestionsService } from '../../services/questions.service';
 @Component({
   selector: 'page-calculadora',
   templateUrl: 'calculadora.html',
@@ -34,6 +35,8 @@ export class CalculadoraPage {
   valor: any;
   click1: any;
 
+  questoes: [] = [];
+
   //Desabilita os botões de respostas se for certa
   disabilitar: boolean = false;
 
@@ -61,6 +64,7 @@ export class CalculadoraPage {
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private viewCtrl: ViewController,
+    private questionsService: QuestionsService,
     private loading: LoadingService
   ) {
 
@@ -109,37 +113,48 @@ export class CalculadoraPage {
     else if (this.Selected_Operation.id == 5) {
       this.result = Math.pow(this.Number1, this.Number2);
     }
-
-    if (this.Correct_position == this.Position1) {
-      this.Value_Position1 = this.result;
-      this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position3 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position2) {
-      this.Value_Position2 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position3 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position3) {
-      this.Value_Position3 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position2 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position4) {
-      this.Value_Position4 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position2 = this.result - 5;
-      this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
-    }
-
+    console.log("Resultado", this.result);
   }
 
   ionViewDidLoad() {
     this.StartTimer()
     this.viewCtrl.showBackButton(false);
+    this.questions()
+  }
+
+  questions() {
+    console.log("sadadas", this.Selected_Operation.id);
+    this.questionsService.questions(this.Selected_Operation)
+      .subscribe(res => {
+        this.questoes = res.data;
+        this.Number1 = res.data[0].problem
+        this.result = res.data[0].result
+        if (this.Correct_position == this.Position1) {
+          this.Value_Position1 = this.result;
+          this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
+          this.Value_Position3 = this.result - 5;
+          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+        }
+        else if (this.Correct_position == this.Position2) {
+          this.Value_Position2 = this.result;
+          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+          this.Value_Position3 = this.result - 5;
+          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+        }
+        else if (this.Correct_position == this.Position3) {
+          this.Value_Position3 = this.result;
+          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+          this.Value_Position2 = this.result - 5;
+          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+        }
+        else if (this.Correct_position == this.Position4) {
+          this.Value_Position4 = this.result;
+          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+          this.Value_Position2 = this.result - 5;
+          this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
+        }
+        console.log("Resultado", this.result);
+      })
   }
 
   StartTimer() {
@@ -167,7 +182,7 @@ export class CalculadoraPage {
     const timer = this.maxtime;
     console.log("tempo de acerto: ", timer);
     //Se o tempo for diferete de zero exculta o acerto se não tempo esgotado
-    if(this.maxtime != 0){
+    if (this.maxtime != 0) {
       this.disabilitar = true
       this.pontuacao += 1;
       this.chaveDeTempo = true;
@@ -178,12 +193,12 @@ export class CalculadoraPage {
         position: 'bottom'
       });
       toast.onDidDismiss(() => {
+        this.questions();
         this.changeNumber(this.valor, this.click1);
         //Para a contagem até mudar para a proxima questão
         this.chaveDeTempo = false;
         this.StartTimer()
         this.disabilitar = false
-        console.log("sadasdas", this.chaveDeTempo);
         this.maxtime = 10;
       });
       toast.present(toast);
@@ -194,6 +209,9 @@ export class CalculadoraPage {
   //Muda a questão se o tempo esgotar
   tempoEsgotado() {
     console.log("Numeros de tentivas: ", this.contTentativas);
+
+    this.questions();
+
     if (this.contTentativas === 0) {
       this.tentativa1 = true;
       this.contTentativas += 1;

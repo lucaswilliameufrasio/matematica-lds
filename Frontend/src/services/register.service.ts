@@ -15,7 +15,7 @@ export class RegisterService {
 
   constructor(public http: Http) { }
   //Envia um metedo post para função na API com os dados do usuário
-  register(date: { nome: string, email: string, senha: string }): Promise<any> {
+  register(date: { nome: string, email: string, senha: string}): Promise<any> {
     return this.http.post(this.api + '/auth/register', date)
     .toPromise()
     .catch(this.handleError);

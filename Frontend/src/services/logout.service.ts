@@ -1,6 +1,6 @@
-import { Http } from '@angular/http';
+
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map'
 import { environment } from '../environment/environment';
 import { Observable } from 'rxjs';
@@ -20,7 +20,7 @@ export class LogoutService {
 
   //Envia um metodo post para função na API invalidado o token
   logout():Observable<any>{
-    return this.http.post(this.api + '/auth/logout', null)
+    return this.http.post(this.api + '/auth/logout', {})
     .pipe(
       catchError(this.handleError)
     )
