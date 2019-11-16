@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
 import { Platform } from 'ionic-angular';
 import { NativeAudio } from '@ionic-native/native-audio';
@@ -6,6 +6,7 @@ import { ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ToastService } from '../../services/toast.service';
 import { LoadingService } from '../../services/loading.service';
+import { QuestionsService } from '../../services/questions.service';
 @Component({
   selector: 'page-calculadora',
   templateUrl: 'calculadora.html',
@@ -61,6 +62,7 @@ export class CalculadoraPage {
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private viewCtrl: ViewController,
+    private questionsService: QuestionsService,
     private loading: LoadingService
   ) {
 
@@ -183,7 +185,6 @@ export class CalculadoraPage {
         this.chaveDeTempo = false;
         this.StartTimer()
         this.disabilitar = false
-        console.log("sadasdas", this.chaveDeTempo);
         this.maxtime = 10;
       });
       toast.present(toast);
