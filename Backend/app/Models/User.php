@@ -37,7 +37,21 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-        // Rest omitted for brevity
+
+    public function rankings()
+    {
+        return $this->belongsToMany('App\Models\Ranking')
+            ->withPivot('score')
+            ->withTimestamps();
+    }
+
+    public function matches(){
+        return $this->hasMany('App\Models\Match')
+        ->withPivot('score')
+        ->withTimestamps();
+    }
+
+    // Rest omitted for brevity
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
