@@ -14,7 +14,6 @@ class UserController extends Controller
             'nome' => 'required|string',
             'email' => 'required|string|email|max:255|unique:users',
             'senha' => 'required|string',
-            'telefone' => 'required|min:14|regex:/^\(\d{2}\)\s\d{5}-\d{4}$/',
         ]);
 
         if ($validator->fails()) {
@@ -25,7 +24,6 @@ class UserController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => bcrypt($request->senha),
-            'cellphone' => $request->telefone,
         ]);
         return response()->json([
             'data' => $usuario,
