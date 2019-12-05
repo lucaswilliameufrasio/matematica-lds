@@ -220,7 +220,7 @@ export class CalculadoraPage {
     console.log("tempo de acerto: ", timer);
     //Se o tempo for diferente de zero escuta o acerto, se não tempo esgotado
     if (this.maxtime != 0) {
-      this.disabilitar = true
+      this.desabilitar = true
       this.scoreLevel()
       this.chaveDeTempo = true;
       this.loading.presentWithGif()
@@ -235,7 +235,7 @@ export class CalculadoraPage {
         this.chaveDeTempo = false;
         this.changeNumber(this.valor, this.click1);
         this.StartTimer()
-        this.disabilitar = false
+        this.desabilitar = false
         this.levelTime()
       });
       toast.present(toast);
