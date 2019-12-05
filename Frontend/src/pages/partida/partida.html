@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>partida</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="login_page">
+
+  <ion-col class="columns_perfil"  (click)='goToRaking()' text-center>
+    <ion-buttons start>
+      <button ion-button class="buttons_ranking">
+        <ion-icon name="trophy"></ion-icon>
+        &nbsp;&nbsp; Ranking
+      </button>
+    </ion-buttons>
+  </ion-col>
+
+  <ion-row class="row">
+    <ion-col class="columns_Home-ad" (click)='goToCalculator()' text-center>
+      <ion-buttons start>
+        <button ion-button class="buttons_Calculator-ad">
+          Iniciar Partida
+        </button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

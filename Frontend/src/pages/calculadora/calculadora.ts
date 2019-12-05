@@ -92,8 +92,8 @@ export class CalculadoraPage {
       );
     });
     
-    this.Selected_Operation = this.navParams.data;
-    
+    this.Selected_Operation = this.navParams.data.Selected_Operation;
+    console.log("Id das Operações:::::", this.Selected_Operation);
     while (this.Number1 < this.Number2) {
       if (this.Selected_Operation.id == 5) {
         this.Number1 = Math.floor(Math.random() * 8 + 1);
@@ -140,7 +140,7 @@ export class CalculadoraPage {
     this.questionsService.questions(this.Selected_Operation.id, this.hits)
       .subscribe(res => {
         this.level = res.data[0].stage;
-        console.log("Nivel:::::", this.level);
+        console.log("Nivel:::::", res.data[0].stage);
         this.questoes = res.data;
         this.Number1 = res.data[0].problem;
         this.result = res.data[0].result;
@@ -225,6 +225,7 @@ export class CalculadoraPage {
   }
 
   scoreLevel() {
+    console.log("Nivel Teste score ", this.level);
     if (this.level === 1) {
       this.pontuacao += this.scoreService.scoreLevel1(this.maxtime);
     }
@@ -336,7 +337,8 @@ export class CalculadoraPage {
     const dados = {
       score: this.pontuacao,
       time: this.maxtimegame,
-      operation: this.Selected_Operation.id
+      operation: this.Selected_Operation.id,
+      hits: this.hits
     }
     console.log("FIM PARTIDA: ", dados);
     this.questionsService.endGame(dados)

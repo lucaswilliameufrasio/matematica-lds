@@ -33,6 +33,7 @@ import { LoadingService } from '../services/loading.service';
 import { QuestionsService } from '../services/questions.service';
 import { ScoreService } from '../services/score.service';
 import { RankingService } from '../services/ranking.service';
+import { PartidaPage } from '../pages/partida/partida';
 
 export function jwtOptionsFactory(storage) {
 
@@ -52,6 +53,7 @@ export function jwtOptionsFactory(storage) {
     MenuPage,
     LoginPage,
     CadastroPage,
+    PartidaPage,
     HomeTDAHPage,
     AberturaPage,
     CalculadoraTdahPage,
@@ -80,6 +82,7 @@ export function jwtOptionsFactory(storage) {
     CalculadoraPage,
     MenuPage,
     LoginPage,
+    PartidaPage,
     CadastroPage,
     HomeTDAHPage,
     AberturaPage,

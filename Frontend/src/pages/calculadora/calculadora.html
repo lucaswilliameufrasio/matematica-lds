@@ -61,9 +61,6 @@
             </div>
           </ion-row>
           <ion-row class="tempo">
-            <p *ngIf="hidevalue==false">{{maxtime}}</p>
-          </ion-row>
-          <ion-row class="tempo">
             <p *ngIf="hidevalue==false">{{maxtimegame}}</p>
           </ion-row>
         </ion-grid>
@@ -71,6 +68,10 @@
       <ion-col width-75>
         <div class="pontostit">Pontuação</div>
         <div class="pontos">{{pontuacao}}</div>
+      </ion-col>
+      <ion-col width-75>
+        <div class="pontostit">Tempo</div>
+        <div class="pontos">{{maxtime}}</div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -82,38 +83,6 @@
         text-center
       >
       {{questoes[0]?.problem}}
-        <!-- {{Number1}}
-        <ion-icon
-          class="op"
-          *ngIf="Selected_Operation.id == 1"
-        >
-          &nbsp;+&nbsp;
-        </ion-icon>
-        <ion-icon
-          class="op"
-          *ngIf="Selected_Operation.id == 2"
-        >
-          &nbsp;-&nbsp;
-        </ion-icon>
-        <ion-icon
-          class="op"
-          *ngIf="Selected_Operation.id == 3"
-        >
-          &nbsp;x&nbsp;
-        </ion-icon>
-        <ion-icon
-          class="op"
-          *ngIf="Selected_Operation.id == 4"
-        >
-          &nbsp;/&nbsp;
-        </ion-icon>
-        <ion-icon
-          class="op"
-          *ngIf="Selected_Operation.id == 5"
-        >
-          &nbsp;^&nbsp;
-        </ion-icon>
-        {{Number2}} -->
       </ion-col>
     </ion-row>
     <ion-row>

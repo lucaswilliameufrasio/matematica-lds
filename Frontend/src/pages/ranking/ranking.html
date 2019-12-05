@@ -9,16 +9,11 @@
 
 <ion-content padding>
 
-  <ion-list>
+  <ion-list *ngFor="let index of ranking.data">
     <ion-item>
       <p class="nome">Lucas William</p>
-      <p class="ponto">2424</p>
+      <p class="ponto">{{index?.match_id}}</p>
     </ion-item>
-
-    <ion-item>
-        <p class="nome">Marcos Henrique</p>
-        <p class="ponto">2423</p>
-      </ion-item>
   </ion-list>
 
 </ion-content>

@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogoutService } from '../../services/logout.service';
 import { ToastService } from '../../services/toast.service';
 import { LoadingService } from '../../services/loading.service';
+import { PartidaPage } from '../partida/partida';
 
 @Component({
   selector: 'page-home',
@@ -41,7 +42,7 @@ export class HomePage {
     public http: HttpClient,
     private storage: Storage,
   ) {
-    this.pushCalculator = CalculadoraPage;
+    this.pushCalculator = PartidaPage;
     this.pushMenu = MenuPage;
     this.gotoProfile = PerfilPage;
     this.gotoRanking = RankingPage;
