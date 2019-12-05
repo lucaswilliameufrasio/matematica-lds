@@ -30,6 +30,7 @@ export class CadastroPage {
       nome: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')])),
       senha: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+      confirmarSenha: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
       // telefone: new FormControl('', Validators.required)
     });
 
@@ -47,16 +48,19 @@ export class CadastroPage {
       senha: this.authForm.value.senha,
       // telefone: this.authForm.value.telefone
     }
+    if (data.senha === this.authForm.value.confirmarSenha) {
 
-    console.log(data);
+      this.registerService.register(data).then(res => {
+        //Exbibe mensagem para usuário
+        this.toastService.presentToast('Cadastrado com sucesso!', "");
+        this.navCtrl.pop();
+      }).catch(error => {
+        this.toastService.presentToast('Dados invalidos!', "");
+      });
 
-    this.registerService.register(data).then(res => {
-      //Exbibe mensagem para usuário
-      this.toastService.presentToast('Cadastrado com sucesso!', "");
-      this.navCtrl.pop();
-    }).catch(error => {
-      this.toastService.presentToast('Dados invalidos!', "");
-    });
+    } else {
+      this.toastService.presentToast('Senhas não coincide!', "");
+    }
   }
 
   //Redireciona para a pagina de login

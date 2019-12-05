@@ -7,6 +7,7 @@ import { HomePage } from '../home/home';
 import { ToastService } from '../../services/toast.service';
 import { LoadingService } from '../../services/loading.service';
 import { QuestionsService } from '../../services/questions.service';
+import { ScoreService } from '../../services/score.service';
 @Component({
   selector: 'page-calculadora',
   templateUrl: 'calculadora.html',
@@ -35,13 +36,13 @@ export class CalculadoraPage {
   valor: any;
   click1: any;
 
-  questoes: [] = [];
+  questoes: Array<any> = [];
 
   //Desabilita os botões de respostas se for certa
   disabilitar: boolean = false;
 
   //Temporizador
-  maxtime: any = 10;
+  maxtime;
   hidevalue;
   timer;
   chaveDeTempo = false;
@@ -55,6 +56,12 @@ export class CalculadoraPage {
   //Pontuação
   pontuacao = 0;
 
+  //Nivel do Jogo
+  level = 2
+
+  //Id da Questão
+  mathproblem_id;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -64,6 +71,7 @@ export class CalculadoraPage {
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
     private viewCtrl: ViewController,
+    private scoreService: ScoreService,
     private questionsService: QuestionsService,
     private loading: LoadingService
   ) {
@@ -117,6 +125,7 @@ export class CalculadoraPage {
   }
 
   ionViewDidLoad() {
+    this.levelTime()
     this.StartTimer()
     this.viewCtrl.showBackButton(false);
     this.questions()
@@ -153,7 +162,13 @@ export class CalculadoraPage {
           this.Value_Position2 = this.result - 5;
           this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
         }
+
+        this.questoes.forEach(element => {
+          this.mathproblem_id = element.id
+        });
         console.log("Resultado", this.result);
+        console.log("Questões ", this.questoes);
+        console.log("id problema ", this.mathproblem_id);
       })
   }
 
@@ -163,7 +178,7 @@ export class CalculadoraPage {
       if (this.maxtime <= 0) {
         this.changeNumber(this.valor, this.click1);
         this.tempoEsgotado();
-        this.maxtime = 10;
+        this.levelTime();
       }
       //Decrementa o tempo
       this.maxtime -= 1
@@ -178,13 +193,35 @@ export class CalculadoraPage {
     }, 1000);
   }
 
+  levelTime() {
+    if (this.level == 1) {
+      this.maxtime = 30
+    }
+    else if (this.level == 2) {
+      this.maxtime = 20
+    } else {
+      this.maxtime = 10
+    }
+  }
+
+  scoreLevel() {
+    if (this.level === 1) {
+      this.pontuacao += this.scoreService.scoreLevel1(this.maxtime);
+    }
+    else if (this.level === 2) {
+      this.pontuacao += this.scoreService.scoreLevel2(this.maxtime);
+    } else {
+      this.pontuacao += this.scoreService.scoreLevel3(this.maxtime);
+    }
+  }
+
   acerto() {
     const timer = this.maxtime;
     console.log("tempo de acerto: ", timer);
     //Se o tempo for diferete de zero exculta o acerto se não tempo esgotado
     if (this.maxtime != 0) {
       this.disabilitar = true
-      this.pontuacao += 1;
+      this.scoreLevel()
       this.chaveDeTempo = true;
       this.loading.presentWithGif()
       let toast = this.toastCtrl.create({
@@ -194,12 +231,12 @@ export class CalculadoraPage {
       });
       toast.onDidDismiss(() => {
         this.questions();
-        this.changeNumber(this.valor, this.click1);
         //Para a contagem até mudar para a proxima questão
         this.chaveDeTempo = false;
+        this.changeNumber(this.valor, this.click1);
         this.StartTimer()
         this.disabilitar = false
-        this.maxtime = 10;
+        this.levelTime()
       });
       toast.present(toast);
       this.loading.dismiss();
@@ -278,106 +315,124 @@ export class CalculadoraPage {
     this.navCtrl.setRoot(HomePage)
   }
 
-  Selection(valor: any, click1: any) {
-    // Se a resposta estiver correta, faça...
-    if (valor == this.result) {
-      this.acerto();
-      if (this.buttonClicked) {
-        this.nativeAudio.play('uniqueId1').then((success) => {
-        }, (error) => {
-        });
-      }
-      if (click1 == 1) {
-        this.buttonColor1 = '#70e733';
-      } else if (click1 == 2) {
-        this.buttonColor2 = '#70e733';
-      } else if (click1 == 3) {
-        this.buttonColor3 = '#70e733';
-      } else if (click1 == 4) {
-        this.buttonColor4 = '#70e733';
-      }
+  // Verifica resposta
+  verifyAnswer(valor: any, click1: any) {
+    const dados = {
+      operation: this.Selected_Operation.id,
+      answer: valor,
+      mathproblem_id: this.mathproblem_id
     }
+    console.log("Dados da resposta => ", dados);
+    this.questionsService.answer(dados)
+      .subscribe(res => {
+        console.log("Verific=>  ", res.message);
+        if (res.message === 'correct_answer') {
+          this.colorButtonAcerto(click1);
+          this.acerto();
+        } else {
+          this.colorButtonErro(click1);
+        }
+      })
+  }
+
+  colorButtonAcerto(click1: any) {
+    // Se a resposta estiver correta, faça...
+    if (this.buttonClicked) {
+      this.nativeAudio.play('uniqueId1').then((success) => {
+      }, (error) => {
+      });
+    }
+    if (click1 == 1) {
+      this.buttonColor1 = '#70e733';
+    } else if (click1 == 2) {
+      this.buttonColor2 = '#70e733';
+    } else if (click1 == 3) {
+      this.buttonColor3 = '#70e733';
+    } else if (click1 == 4) {
+      this.buttonColor4 = '#70e733';
+    }
+  }
+  
+  colorButtonErro(click1: any) {
     //Se a resposta estiver incorreta, faça...
-    else {
-      if (this.buttonClicked) {
-        this.nativeAudio.play('uniqueId2').then((success) => {
-        }, (error) => {
-        });
+    if (this.buttonClicked) {
+      this.nativeAudio.play('uniqueId2').then((success) => {
+      }, (error) => {
+      });
+    }
+    if (click1 == 1) {
+      this.buttonColor1 = '#ff9600';
+      if (this.Correct_position == this.Position1) {
+        // this.buttonColor1 = '#70e733';
+        this.erro();
       }
-      if (click1 == 1) {
-        this.buttonColor1 = '#ff9600';
-        if (this.Correct_position == this.Position1) {
-          // this.buttonColor1 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position2) {
-          // this.buttonColor2 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position3) {
-          // this.buttonColor3 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position4) {
-          // this.buttonColor4 = '#70e733';
-          this.erro();
-        }
-      } else if (click1 == 2) {
-        this.buttonColor2 = '#ff9600';
+      else if (this.Correct_position == this.Position2) {
+        // this.buttonColor2 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position3) {
+        // this.buttonColor3 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position4) {
+        // this.buttonColor4 = '#70e733';
+        this.erro();
+      }
+    } else if (click1 == 2) {
+      this.buttonColor2 = '#ff9600';
 
-        if (this.Correct_position == this.Position1) {
-          // this.buttonColor1 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position2) {
-          // this.buttonColor2 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position3) {
-          // this.buttonColor3 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position4) {
-          // this.buttonColor4 = '#70e733';
-          this.erro();
-        }
-      } else if (click1 == 3) {
-        this.buttonColor3 = '#ff9600';
-        if (this.Correct_position == this.Position1) {
-          // this.buttonColor1 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position2) {
-          // this.buttonColor2 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position3) {
-          // this.buttonColor3 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position4) {
-          // this.buttonColor4 = '#70e733';
-          this.erro();
-        }
+      if (this.Correct_position == this.Position1) {
+        // this.buttonColor1 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position2) {
+        // this.buttonColor2 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position3) {
+        // this.buttonColor3 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position4) {
+        // this.buttonColor4 = '#70e733';
+        this.erro();
+      }
+    } else if (click1 == 3) {
+      this.buttonColor3 = '#ff9600';
+      if (this.Correct_position == this.Position1) {
+        // this.buttonColor1 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position2) {
+        // this.buttonColor2 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position3) {
+        // this.buttonColor3 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position4) {
+        // this.buttonColor4 = '#70e733';
+        this.erro();
+      }
 
-      } else if (click1 == 4) {
-        this.buttonColor4 = '#ff9600';
-        if (this.Correct_position == this.Position1) {
-          // this.buttonColor1 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position2) {
-          // this.buttonColor2 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position3) {
-          // this.buttonColor3 = '#70e733';
-          this.erro();
-        }
-        else if (this.Correct_position == this.Position4) {
-          // this.buttonColor4 = '#70e733';
-          this.erro();
-        }
+    } else if (click1 == 4) {
+      this.buttonColor4 = '#ff9600';
+      if (this.Correct_position == this.Position1) {
+        // this.buttonColor1 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position2) {
+        // this.buttonColor2 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position3) {
+        // this.buttonColor3 = '#70e733';
+        this.erro();
+      }
+      else if (this.Correct_position == this.Position4) {
+        // this.buttonColor4 = '#70e733';
+        this.erro();
       }
     }
   }

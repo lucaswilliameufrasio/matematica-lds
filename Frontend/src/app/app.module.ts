@@ -31,6 +31,7 @@ import { VerifyTokenService } from '../services/verifyToken.service';
 import { InterceptorTokenProvider } from '../providers/interceptor-token/interceptor-token';
 import { LoadingService } from '../services/loading.service';
 import { QuestionsService } from '../services/questions.service';
+import { ScoreService } from '../services/score.service';
 
 export function jwtOptionsFactory(storage) {
 
@@ -96,6 +97,7 @@ export function jwtOptionsFactory(storage) {
     ToastService,
     VerifyTokenService,
     SocialSharing,
+    ScoreService,
     NativeAudio,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorTokenProvider, multi: true },
     { provide: ErrorHandler, useClass: IonicErrorHandler },

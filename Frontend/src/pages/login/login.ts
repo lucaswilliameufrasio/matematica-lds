@@ -35,7 +35,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-  
+
   }
 
   //Exibe mensagem de login com sucesso se não houver erro
@@ -69,7 +69,7 @@ export class LoginPage {
       }
       this.loadingService.dismiss()
     }).catch(error => {
-      console.log('Não possivel fazer login');
+      this.presentToast('Email ou senha invalido');
     });
   }
 

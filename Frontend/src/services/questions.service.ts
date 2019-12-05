@@ -26,8 +26,8 @@ export class QuestionsService {
   }
 
   // Envia a resposta para a rota na API que retorna o resultado
-  answer(): Observable<any> {
-    return this.http.post(this.api + '', {})
+  answer(dados): Observable<any> {
+    return this.http.post(this.api + '/verifyAnswer', dados)
       .pipe()
       .catch(this.handleError);
   }
