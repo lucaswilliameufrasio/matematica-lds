@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ranking extends Model
 {
     protected $fillable = [
-        'score', 'time', 'mathoperation_id', 'users_id'
+        'match_id', 'mathoperation_id', 'users_id'
     ];
 
     // public function users(){

@@ -38,7 +38,7 @@ export class CalculadoraPage {
   questoes: [] = [];
 
   //Desabilita os botões de respostas se for certa
-  disabilitar: boolean = false;
+  desabilitar: boolean = false;
 
   //Temporizador
   maxtime: any = 10;
@@ -159,7 +159,7 @@ export class CalculadoraPage {
 
   StartTimer() {
     this.timer = setTimeout(x => {
-      //Se o tempo for menor ou iqual a 0 passa para a proxima pergunta e retorna o tempo
+      //Se o tempo for igual a 0 passa para a proxima pergunta e retorna o tempo
       if (this.maxtime <= 0) {
         this.changeNumber(this.valor, this.click1);
         this.tempoEsgotado();
@@ -167,7 +167,7 @@ export class CalculadoraPage {
       }
       //Decrementa o tempo
       this.maxtime -= 1
-      //Se o tempo for menor ou iqual 0 e o numeros de tentativas for menor ou iqual 2 continua contando
+      //Se o tempo for igual a 0 e o numero de tentativas for menor ou iqual 2 continua contando
       if (this.maxtime >= 0 && this.contTentativas <= 2 && this.chaveDeTempo == false) {
         this.hidevalue = false;
         this.StartTimer();
@@ -181,9 +181,9 @@ export class CalculadoraPage {
   acerto() {
     const timer = this.maxtime;
     console.log("tempo de acerto: ", timer);
-    //Se o tempo for diferete de zero exculta o acerto se não tempo esgotado
+    //Se o tempo for diferente de zero escuta o acerto, se não tempo esgotado
     if (this.maxtime != 0) {
-      this.disabilitar = true
+      this.desabilitar = true
       this.pontuacao += 1;
       this.chaveDeTempo = true;
       this.loading.presentWithGif()
@@ -198,7 +198,7 @@ export class CalculadoraPage {
         //Para a contagem até mudar para a proxima questão
         this.chaveDeTempo = false;
         this.StartTimer()
-        this.disabilitar = false
+        this.desabilitar = false
         this.maxtime = 10;
       });
       toast.present(toast);

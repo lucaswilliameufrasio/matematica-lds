@@ -34,7 +34,7 @@ Route::group([
 
 ], function () {
     Route::post('login', 'AuthController@login');
-    Route::post('register', 'UserController@registerUser');
+    Route::post('register', 'Users\UserController@registerUser');
 });
 
 //Rotas de autenticação protegidas
@@ -45,7 +45,8 @@ Route::group([
 ], function () {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'UserController@me');
+    Route::post('me', 'Users\UserController@me');
+    Route::patch('updateMe', 'Users\UserController@updateUser');
 });
 
 //Rotas protegidas
@@ -53,11 +54,13 @@ Route::group([
     'middleware' => 'jwt.verify',
 
 ], function () {
-    Route::post('getMathProblem', 'Ranking\ScoreController@getOneMathProblem');
-    Route::post('verifyAnswer', 'Ranking\ScoreController@verifyAnswer');
-    Route::post('endGame', 'Ranking\ScoreController@registerMatch');
+    Route::post('getMathProblem', 'MathProblems\MathProblemsController@retOneMathProblem');
+    Route::post('verifyAnswer', 'MathProblems\AnswerController@verifyAnswer');
+    Route::post('endGame', 'Scores\ScoreController@registerMatch');
 
-    Route::get('listMyMatches', 'Match\MatchesController@listAllMatches');
+    Route::get('listMyMatches/{operation}', 'Matches\MatchesController@listAllMatches');
+    // Route::get('testValidateRanking', 'Scores\ScoreController@testVerifyBestMatch');
+    Route::get('showRank/{operation}', 'Rankings\RankingsController@showUserRanking');
 
 });
 

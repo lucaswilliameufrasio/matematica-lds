@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Match;
+namespace App\Http\Controllers\Matches;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,8 +8,8 @@ use App\Models\Match;
 
 class MatchesController extends Controller
 {
-    public function listAllMatches(){
-        $list = Match::where('users_id', auth()->id())->get();
+    public function listAllMatches($operation){
+        $list = Match::where('users_id', auth()->id())->where('mathoperation_id', $operation)->get();
 
         return response()->json(
             [
