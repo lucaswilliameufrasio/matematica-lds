@@ -32,6 +32,7 @@ import { InterceptorTokenProvider } from '../providers/interceptor-token/interce
 import { LoadingService } from '../services/loading.service';
 import { QuestionsService } from '../services/questions.service';
 import { ScoreService } from '../services/score.service';
+import { RankingService } from '../services/ranking.service';
 
 export function jwtOptionsFactory(storage) {
 
@@ -94,6 +95,7 @@ export function jwtOptionsFactory(storage) {
     StatusBar,
     SplashScreen,
     QuestionsService,
+    RankingService,
     ToastService,
     VerifyTokenService,
     SocialSharing,

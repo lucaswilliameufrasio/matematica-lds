@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RankingService } from '../../services/ranking.service';
 
 /**
  * Generated class for the RankingPage page.
@@ -15,11 +16,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RankingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  ranking: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private rankingService: RankingService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RankingPage');
   }
+
+  // getRanking(){
+  //   this.rankingService.ranking()
+  // }
 
 }

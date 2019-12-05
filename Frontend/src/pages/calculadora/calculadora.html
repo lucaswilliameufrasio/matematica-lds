@@ -63,6 +63,9 @@
           <ion-row class="tempo">
             <p *ngIf="hidevalue==false">{{maxtime}}</p>
           </ion-row>
+          <ion-row class="tempo">
+            <p *ngIf="hidevalue==false">{{maxtimegame}}</p>
+          </ion-row>
         </ion-grid>
       </ion-col>
       <ion-col width-75>
@@ -123,7 +126,7 @@
           id="1"
         >
           <button
-            [disabled]="disabilitar"
+            [disabled]="desabilitar"
             class="Button_Share"
             ion-button
             [ngStyle]="{'background-color': buttonColor1}"
@@ -141,7 +144,7 @@
           id="2"
         >
           <button
-            [disabled]="disabilitar"
+            [disabled]="desabilitar"
             class="Button_Share"
             ion-button
             [ngStyle]="{'background-color': buttonColor2}"
@@ -161,7 +164,7 @@
           id="3"
         >
           <button
-            [disabled]="disabilitar"
+            [disabled]="desabilitar"
             class="Button_Share"
             ion-button
             [ngStyle]="{'background-color': buttonColor3}"
@@ -179,7 +182,7 @@
           id="4"
         >
           <button
-            [disabled]="disabilitar"
+            [disabled]="desabilitar"
             class="Button_Share"
             ion-button
             [ngStyle]="{'background-color': buttonColor4}"

@@ -5,10 +5,10 @@ import { environment } from '../environment/environment';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class QuestionsService {
+export class RankingService {
 
   /*
-     Classe CadastroService contem a função questions().
+     Classe CadastroService contem a função ranking().
      Esse serviso precisa ser importado no arquivo "TS" da pagina que será utilizado.
   */
 
@@ -16,28 +16,8 @@ export class QuestionsService {
 
   constructor(public http: HttpClient) { }
   //Envia um metedo post para função na API que retorna os valores das questões
-  questions(operation, hits): Observable<any> {
-    const dados = {
-      operation: operation,
-      hits: hits
-    }
-    return this.http.post(this.api + '/getMathProblem', dados)
-      .pipe()
-      .catch(this.handleError);
-  }
-
-
-  //Finaliza a partida
-  endGame(dados): Observable<any> {
-    return this.http.post(this.api + '/endGame', dados)
-      .pipe()
-      .catch(this.handleError);
-  }
-  
-
-  // Envia a resposta para a rota na API que retorna o resultado
-  answer(dados): Observable<any> {
-    return this.http.post(this.api + '/verifyAnswer', dados)
+  ranking(operation): Observable<any> {
+    return this.http.get(this.api + '/showRank/' + operation)
       .pipe()
       .catch(this.handleError);
   }

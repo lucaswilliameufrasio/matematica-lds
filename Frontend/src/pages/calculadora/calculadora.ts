@@ -43,7 +43,9 @@ export class CalculadoraPage {
 
   //Temporizador
   maxtime;
+  maxtimegame = 0;
   hidevalue;
+  stopTimeGame = false;
   timer;
   chaveDeTempo = false;
 
@@ -55,9 +57,10 @@ export class CalculadoraPage {
 
   //Pontuação
   pontuacao = 0;
+  hits = 0;
 
   //Nivel do Jogo
-  level = 2
+  level = 1;
 
   //Id da Questão
   mathproblem_id;
@@ -88,9 +91,9 @@ export class CalculadoraPage {
       }
       );
     });
-
+    
     this.Selected_Operation = this.navParams.data;
-
+    
     while (this.Number1 < this.Number2) {
       if (this.Selected_Operation.id == 5) {
         this.Number1 = Math.floor(Math.random() * 8 + 1);
@@ -123,21 +126,24 @@ export class CalculadoraPage {
     }
     console.log("Resultado", this.result);
   }
-
+  
   ionViewDidLoad() {
+    this.questions()
     this.levelTime()
     this.StartTimer()
+    this.StartTimerGame()
     this.viewCtrl.showBackButton(false);
-    this.questions()
   }
 
   questions() {
     console.log("sadadas", this.Selected_Operation.id);
-    this.questionsService.questions(this.Selected_Operation)
+    this.questionsService.questions(this.Selected_Operation.id, this.hits)
       .subscribe(res => {
+        this.level = res.data[0].stage;
+        console.log("Nivel:::::", this.level);
         this.questoes = res.data;
-        this.Number1 = res.data[0].problem
-        this.result = res.data[0].result
+        this.Number1 = res.data[0].problem;
+        this.result = res.data[0].result;
         if (this.Correct_position == this.Position1) {
           this.Value_Position1 = this.result;
           this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
@@ -193,11 +199,25 @@ export class CalculadoraPage {
     }, 1000);
   }
 
+  StartTimerGame() {
+    this.timer = setTimeout(x => {
+      //Decrementa o tempo
+      this.maxtimegame += 1
+      //Se o tempo for igual a 0 e o numero de tentativas for menor ou iqual 2 continua contando
+      if (this.stopTimeGame === false) {
+        this.hidevalue = false;
+        this.StartTimerGame();
+      } else {
+        this.hidevalue = true;
+      }
+    }, 1000);
+  }
+
   levelTime() {
-    if (this.level == 1) {
+    if (this.level === 1) {
       this.maxtime = 30
     }
-    else if (this.level == 2) {
+    else if (this.level === 2) {
       this.maxtime = 20
     } else {
       this.maxtime = 10
@@ -216,14 +236,15 @@ export class CalculadoraPage {
   }
 
   acerto() {
+    this.hits += 1;
     const timer = this.maxtime;
     console.log("tempo de acerto: ", timer);
-    //Se o tempo for diferente de zero escuta o acerto, se não tempo esgotado
+    console.log("acertos: ", this.hits);
+    //Se o tempo for diferente de zero executa o acerto, se não tempo esgotado
     if (this.maxtime != 0) {
-      this.desabilitar = true
+      console.log("Desabilita o botão: ", this.desabilitar);
       this.scoreLevel()
       this.chaveDeTempo = true;
-      this.loading.presentWithGif()
       let toast = this.toastCtrl.create({
         message: 'Resposta Correta!',
         duration: 2000,
@@ -233,13 +254,12 @@ export class CalculadoraPage {
         this.questions();
         //Para a contagem até mudar para a proxima questão
         this.chaveDeTempo = false;
+        this.desabilitar = false
         this.changeNumber(this.valor, this.click1);
         this.StartTimer()
-        this.desabilitar = false
         this.levelTime()
       });
       toast.present(toast);
-      this.loading.dismiss();
     }
   }
 
@@ -277,6 +297,8 @@ export class CalculadoraPage {
       this.contTentativas += 1;
     }
     else if (this.contTentativas === 2) {
+      this.stopTimeGame = true;
+      console.log("Tempo da partida: ", this.maxtimegame);
       this.tentativa3 = true;
       this.contTentativas += 1;
       this.fimPartida()
@@ -311,12 +333,22 @@ export class CalculadoraPage {
 
   //Finaliza a partida mostrando a pontuação
   fimPartida() {
-    this.presentAlert()
-    this.navCtrl.setRoot(HomePage)
+    const dados = {
+      score: this.pontuacao,
+      time: this.maxtimegame,
+      operation: this.Selected_Operation.id
+    }
+    console.log("FIM PARTIDA: ", dados);
+    this.questionsService.endGame(dados)
+      .subscribe(res => {
+        this.presentAlert()
+        this.navCtrl.setRoot(HomePage)
+      })
   }
 
   // Verifica resposta
   verifyAnswer(valor: any, click1: any) {
+    this.loading.presentWithGif()
     const dados = {
       operation: this.Selected_Operation.id,
       answer: valor,
@@ -327,12 +359,15 @@ export class CalculadoraPage {
       .subscribe(res => {
         console.log("Verific=>  ", res.message);
         if (res.message === 'correct_answer') {
+          this.desabilitar = true
           this.colorButtonAcerto(click1);
           this.acerto();
+          this.loading.dismiss();
         } else {
           this.colorButtonErro(click1);
         }
       })
+      this.loading.dismiss();
   }
 
   colorButtonAcerto(click1: any) {
@@ -477,31 +512,31 @@ export class CalculadoraPage {
       this.result = Math.pow(this.Number1, this.Number2);
     }
 
-    if (this.Correct_position == this.Position1) {
-      ;
-      this.Value_Position1 = this.result;
-      this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position3 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position2) {
-      this.Value_Position2 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position3 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position3) {
-      this.Value_Position3 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position2 = this.result - 5;
-      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    }
-    else if (this.Correct_position == this.Position4) {
-      this.Value_Position4 = this.result;
-      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-      this.Value_Position2 = this.result - 5;
-      this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
-    }
+    // if (this.Correct_position == this.Position1) {
+    //   this.Value_Position1 = this.result;
+    //   this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
+    //   this.Value_Position3 = this.result - 5;
+    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    // }
+    // else if (this.Correct_position == this.Position2) {
+    //   this.Value_Position2 = this.result;
+    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+    //   this.Value_Position3 = this.result - 5;
+    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    // }
+    // else if (this.Correct_position == this.Position3) {
+    //   this.Value_Position3 = this.result;
+    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+    //   this.Value_Position2 = this.result - 5;
+    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    // }
+    // else if (this.Correct_position == this.Position4) {
+    //   this.Value_Position4 = this.result;
+    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+    //   this.Value_Position2 = this.result - 5;
+    //   this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
+    // }
+
     this.buttonColor1 = '#fff9ff';
     this.buttonColor2 = '#fff9ff';
     this.buttonColor3 = '#fff9ff';
