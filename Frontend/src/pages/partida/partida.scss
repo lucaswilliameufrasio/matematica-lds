@@ -6,8 +6,27 @@ page-partida {
     margin: 0
   }
 
+  .buttons_ranking {
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 1.6rem;
+  }
+
+  .buttons_Calculator-ad {
+    background-color: blue;
+    border-radius: 10px;
+    box-shadow: none;
+    font-size: 1.6rem;
+
+  }
+
+  .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
+    color: #ffffff;
+    background-color: transparent;
+  }
+
   .toolbar-title-md {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     font-weight: 500;
   }
 

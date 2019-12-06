@@ -11,6 +11,15 @@
   border-top: solid 4px #FFF;
 }
 
+.botao_num {
+  width: 100%;
+}
+
+.tempo_tot {
+  width: 16px;
+  float: left;
+}
+
 ion-toast.error .toast-wrapper {
 	background: #ff9600;
 }
@@ -62,7 +71,7 @@ page-calculadora {
     background-color: #FFF;
     border-radius: 2px;
     padding: 5px 5px 0 5px;
-    width: 100px;
+    width: 120px;
   }
 
   .vidas {
@@ -118,6 +127,8 @@ page-calculadora {
     padding-top: 18px;
     padding-bottom: 14px;
     border-radius: 17px;
+    padding: 0 0.5em;
+    width: 100%;
   }
 
   .vol {

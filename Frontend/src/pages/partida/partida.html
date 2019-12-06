@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>partida</ion-title>
+    <ion-title>Jogadas</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -9,16 +9,18 @@
 
 <ion-content padding class="login_page">
 
-  <ion-col class="columns_perfil"  (click)='goToRaking()' text-center>
-    <ion-buttons start>
-      <button ion-button class="buttons_ranking">
-        <ion-icon name="trophy"></ion-icon>
-        &nbsp;&nbsp; Ranking
-      </button>
-    </ion-buttons>
-  </ion-col>
+  
 
   <ion-row class="row">
+      <ion-col class="columns_perfil" (click)='goToRaking()' text-center>
+          <ion-buttons start>
+            <button ion-button class="buttons_ranking">
+              <ion-icon name="trophy"></ion-icon>
+              &nbsp;&nbsp; Ranking
+            </button>
+          </ion-buttons>
+        </ion-col>
+
     <ion-col class="columns_Home-ad" (click)='goToCalculator()' text-center>
       <ion-buttons start>
         <button ion-button class="buttons_Calculator-ad">
@@ -27,5 +29,13 @@
       </ion-buttons>
     </ion-col>
   </ion-row>
+
+  <hr>
+
+  <ion-list>
+      <ion-item>
+        <p class="nome">pontos <br> tempo</p>
+      </ion-item>
+  </ion-list>
 
 </ion-content>

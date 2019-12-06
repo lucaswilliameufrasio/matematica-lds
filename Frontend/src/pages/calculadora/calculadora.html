@@ -19,6 +19,9 @@
           <ion-row>
             <div class="acertos">
               <ion-col>
+                  <div class="tempo_tot" *ngIf="hidevalue==false">{{maxtimegame}}</div>
+              </ion-col>
+              <ion-col>
 
                 <ion-icon
                   *ngIf="tentativa1 === false"
@@ -59,9 +62,6 @@
               </ion-col>
 
             </div>
-          </ion-row>
-          <ion-row class="tempo">
-            <p *ngIf="hidevalue==false">{{maxtimegame}}</p>
           </ion-row>
         </ion-grid>
       </ion-col>
