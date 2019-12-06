@@ -126,16 +126,48 @@ export class CalculadoraPage {
     }
     console.log("Resultado", this.result);
   }
+
+  ngOnInit () {
+    this.getQuestions()
+  }
   
   ionViewDidLoad() {
-    this.questions()
     this.levelTime()
     this.StartTimer()
     this.StartTimerGame()
     this.viewCtrl.showBackButton(false);
   }
 
-  questions() {
+  questions(result){
+
+    if (this.Correct_position == this.Position1) {
+      this.Value_Position1 = this.result;
+      this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
+      this.Value_Position3 = this.result - 5;
+      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    }
+    else if (this.Correct_position == this.Position2) {
+      this.Value_Position2 = this.result;
+      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+      this.Value_Position3 = this.result - 5;
+      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    }
+    else if (this.Correct_position == this.Position3) {
+      this.Value_Position3 = this.result;
+      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+      this.Value_Position2 = this.result - 5;
+      this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
+    }
+    else if (this.Correct_position == this.Position4) {
+      this.Value_Position4 = this.result;
+      this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
+      this.Value_Position2 = this.result - 5;
+      this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
+    }
+
+  }
+
+  getQuestions() {
     console.log("sadadas", this.Selected_Operation.id);
     this.questionsService.questions(this.Selected_Operation.id, this.hits)
       .subscribe(res => {
@@ -144,34 +176,8 @@ export class CalculadoraPage {
         this.questoes = res.data;
         this.Number1 = res.data[0].problem;
         this.result = res.data[0].result;
-        if (this.Correct_position == this.Position1) {
-          this.Value_Position1 = this.result;
-          this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
-          this.Value_Position3 = this.result - 5;
-          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-        }
-        else if (this.Correct_position == this.Position2) {
-          this.Value_Position2 = this.result;
-          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-          this.Value_Position3 = this.result - 5;
-          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-        }
-        else if (this.Correct_position == this.Position3) {
-          this.Value_Position3 = this.result;
-          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-          this.Value_Position2 = this.result - 5;
-          this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-        }
-        else if (this.Correct_position == this.Position4) {
-          this.Value_Position4 = this.result;
-          this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-          this.Value_Position2 = this.result - 5;
-          this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
-        }
-
-        this.questoes.forEach(element => {
-          this.mathproblem_id = element.id
-        });
+        this.questions(this.result)
+        this.mathproblem_id = res.data[0].id
         console.log("Resultado", this.result);
         console.log("Questões ", this.questoes);
         console.log("id problema ", this.mathproblem_id);
@@ -252,7 +258,7 @@ export class CalculadoraPage {
         position: 'bottom'
       });
       toast.onDidDismiss(() => {
-        this.questions();
+        this.getQuestions();
         //Para a contagem até mudar para a proxima questão
         this.chaveDeTempo = false;
         this.desabilitar = false
@@ -266,9 +272,10 @@ export class CalculadoraPage {
 
   //Muda a questão se o tempo esgotar
   tempoEsgotado() {
+
     console.log("Numeros de tentivas: ", this.contTentativas);
 
-    this.questions();
+    this.getQuestions();
 
     if (this.contTentativas === 0) {
       this.tentativa1 = true;
@@ -340,9 +347,9 @@ export class CalculadoraPage {
       operation: this.Selected_Operation.id,
       hits: this.hits
     }
-    console.log("FIM PARTIDA: ", dados);
     this.questionsService.endGame(dados)
-      .subscribe(res => {
+    .subscribe(res => {
+      console.log("FIM PARTIDA: ", res);
         this.presentAlert()
         this.navCtrl.setRoot(HomePage)
       })
@@ -354,6 +361,7 @@ export class CalculadoraPage {
     const dados = {
       operation: this.Selected_Operation.id,
       answer: valor,
+      hits: this.hits,
       mathproblem_id: this.mathproblem_id
     }
     console.log("Dados da resposta => ", dados);
@@ -364,6 +372,7 @@ export class CalculadoraPage {
           this.desabilitar = true
           this.colorButtonAcerto(click1);
           this.acerto();
+          console.log("Questões de verificação", res);
           this.loading.dismiss();
         } else {
           this.colorButtonErro(click1);

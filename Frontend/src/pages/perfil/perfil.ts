@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PerfilService } from '../../services/perfil.service';
 
-/**
- * Generated class for the PerfilPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -15,11 +11,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PerfilPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  perfil: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private perfilService: PerfilService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
+    this.getPerfil()
+  }
+
+  getPerfil(){
+    this.perfilService.perfil()
+    .subscribe(res => {
+      this.perfil = res
+      console.log(this.perfil);
+    })
   }
 
 }
