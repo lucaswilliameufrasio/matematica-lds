@@ -16,8 +16,8 @@ class CreateMatchesTable extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('score');
-            $table->string('time');
+            $table->bigInteger('score');
+            $table->bigInteger('time');
             $table->unsignedBigInteger('mathoperation_id');
             $table->foreign('mathoperation_id')->references('id')->on('math_operations');
             $table->unsignedBigInteger('users_id');
