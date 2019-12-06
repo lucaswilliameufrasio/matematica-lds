@@ -91,7 +91,7 @@ export class CalculadoraPage {
       }
       );
     });
-    
+
     this.Selected_Operation = this.navParams.data.Selected_Operation;
     console.log("Id das Operações:::::", this.Selected_Operation);
     while (this.Number1 < this.Number2) {
@@ -130,7 +130,7 @@ export class CalculadoraPage {
   ngOnInit () {
     this.getQuestions()
   }
-  
+
   ionViewDidLoad() {
     this.levelTime()
     this.StartTimer()
@@ -332,8 +332,8 @@ export class CalculadoraPage {
     const ponto = String(this.pontuacao)
     console.log(ponto);
     let alert = this.alertCtrl.create({
-      title: 'Sua pontuação',
-      subTitle: ponto,
+      title: 'Seu desempenho',
+      subTitle: ("Pontuação: " + ponto + ", Tempo: " + this.maxtimegame),
       buttons: ['Fechar']
     });
     alert.present();
