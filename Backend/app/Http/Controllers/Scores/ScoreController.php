@@ -55,7 +55,7 @@ class ScoreController extends Controller
                 return $this->updateRankingRecord($current);
             } else {
 
-                return $score;
+                return $current;
             }
         }
     }
