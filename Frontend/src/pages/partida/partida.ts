@@ -23,20 +23,21 @@ export class PartidaPage {
     this.listMyMatches();
   }
 
-  goToCalculator(){
-    this.navCtrl.push(CalculadoraPage, {Selected_Operation: this.Selected_Operation})
+  goToCalculator() {
+    this.navCtrl.push(CalculadoraPage, { Selected_Operation: this.Selected_Operation })
   }
 
-  goToRaking(){
-    this.navCtrl.push(RankingPage, {Selected_Operation: this.Selected_Operation})
+  goToRaking() {
+    this.navCtrl.push(RankingPage, { Selected_Operation: this.Selected_Operation })
   }
 
-  listMyMatches(){
+  listMyMatches() {
     this.loading.presentWithGif()
     this.rankingService.listMyMatches(this.Selected_Operation.id)
-    .subscribe(res => {
-      this.matches = res;
-    })
+      .subscribe(res => {
+        this.matches = res;
+        console.log(res);
+      })
     this.loading.dismiss();
   }
 

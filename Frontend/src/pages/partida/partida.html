@@ -9,7 +9,7 @@
 
 <ion-content padding class="login_page">
 
-  
+
 
   <ion-row class="row">
       <ion-col class="columns_perfil" (click)='goToRaking()' text-center>
@@ -31,11 +31,15 @@
   </ion-row>
 
   <hr>
-  
-  <ion-list>
+
+  <ion-list *ngIf="matches.data?.length != 0; else vazio">
       <ion-item *ngFor="let index of matches.data; let i = index">
         <p class="nome">{{i+1}} - Pontuação: &nbsp; {{index?.score}} &nbsp;&nbsp; Tempo: &nbsp; {{index?.time}}</p>
       </ion-item>
   </ion-list>
-
+<ng-template #vazio>
+       <ion-item >
+        <p class="nome"> Não há histótico de partidas</p>
+      </ion-item>
+</ng-template>
 </ion-content>
