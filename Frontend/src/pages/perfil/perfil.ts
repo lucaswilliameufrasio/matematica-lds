@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PerfilService } from '../../services/perfil.service';
 import { RankingService } from '../../services/ranking.service';
 import { EditarPerfilPage } from '../editar-perfil/editar-perfil';
+import { LoadingService } from '../../services/loading.service';
 
 
 
@@ -15,23 +16,24 @@ export class PerfilPage {
 
   perfil: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private perfilService: PerfilService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private perfilService: PerfilService, private loading: LoadingService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PerfilPage');
   }
-  
+
   ionViewWillEnter(){
     this.getPerfil()
   }
 
   getPerfil() {
+    this.loading.presentWithGif()
     this.perfilService.perfil()
       .subscribe(res => {
         this.perfil = res
-        console.log(this.perfil);
       })
+    this.loading.dismiss()
   }
 
   goToEditar(){

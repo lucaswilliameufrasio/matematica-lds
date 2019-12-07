@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RankingService } from '../../services/ranking.service';
+import { LoadingService } from '../../services/loading.service';
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ export class RankingPage {
 
   Selected_Operation: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private rankingService: RankingService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private rankingService: RankingService, private loading: LoadingService) {
     this.Selected_Operation = this.navParams.data.Selected_Operation;
   }
 
@@ -23,13 +24,12 @@ export class RankingPage {
   }
 
   getRanking() {
-    let rankingTemp = [];
+    this.loading.presentWithGif()
     this.rankingService.ranking(this.Selected_Operation.id)
       .subscribe(res => {
         this.ranking = res.data
-        //this.ranking.sort((a, b) => (a.score < b.score) ? -1 : 1);
-        console.log("Ranking:::", this.ranking);
       });
+    this.loading.dismiss()
   }
 
   public sortByKey(array, key) {
