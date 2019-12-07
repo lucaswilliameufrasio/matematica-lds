@@ -1,0 +1,54 @@
+<ion-content
+  class="login_page register_page"
+  padding
+>
+  <form
+    class="app_form"
+    [formGroup]="authForm"
+  >
+    <div class="logo">Alterar Perfil!</div>
+    <div class="list list-inset">
+
+      <label class="item item-input">
+        <i class="icon ion-android-person placeholder-icon"></i>
+        <ion-input
+          value="{{perfil?.name}}"
+          type="text"
+          placeholder="Nome"
+          name="nome"
+          formControlName="nome"
+        >  </ion-input>
+      </label>
+
+      <!-- <label class="item item-input">
+        <i class="icon ion-email placeholder-icon"></i>
+        <input
+          value = "{{perfil?.email}}"
+          type="email"
+          placeholder="E-mail"
+          name="email"
+          formControlName="email"
+        >
+      </label> -->
+
+      <div class="row">
+        <div class="col">
+          <a
+            (click)="editar()"
+            class="button button-block main_btn"
+          >
+            Alterar
+          </a>
+        </div>
+        <div class="col">
+          <a
+            (click)="goToBack()"
+            class="button button-block"
+          >
+            Voltar
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+</ion-content>

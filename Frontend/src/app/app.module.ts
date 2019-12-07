@@ -35,6 +35,7 @@ import { ScoreService } from '../services/score.service';
 import { RankingService } from '../services/ranking.service';
 import { PartidaPage } from '../pages/partida/partida';
 import { PerfilService } from '../services/perfil.service';
+import { EditarPerfilPage } from '../pages/editar-perfil/editar-perfil';
 
 export function jwtOptionsFactory(storage) {
 
@@ -56,6 +57,7 @@ export function jwtOptionsFactory(storage) {
     CadastroPage,
     PartidaPage,
     HomeTDAHPage,
+    EditarPerfilPage,
     AberturaPage,
     CalculadoraTdahPage,
     PerfilPage,
@@ -83,6 +85,7 @@ export function jwtOptionsFactory(storage) {
     CalculadoraPage,
     MenuPage,
     LoginPage,
+    EditarPerfilPage,
     PartidaPage,
     CadastroPage,
     HomeTDAHPage,

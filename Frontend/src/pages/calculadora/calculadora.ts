@@ -93,7 +93,6 @@ export class CalculadoraPage {
     });
 
     this.Selected_Operation = this.navParams.data.Selected_Operation;
-    console.log("Id das Operações:::::", this.Selected_Operation);
     while (this.Number1 < this.Number2) {
       if (this.Selected_Operation.id == 5) {
         this.Number1 = Math.floor(Math.random() * 8 + 1);
@@ -124,10 +123,9 @@ export class CalculadoraPage {
     else if (this.Selected_Operation.id == 5) {
       this.result = Math.pow(this.Number1, this.Number2);
     }
-    console.log("Resultado", this.result);
   }
 
-  ngOnInit () {
+  ngOnInit() {
     this.getQuestions()
   }
 
@@ -138,7 +136,7 @@ export class CalculadoraPage {
     this.viewCtrl.showBackButton(false);
   }
 
-  questions(result){
+  questions(result) {
 
     if (this.Correct_position == this.Position1) {
       this.Value_Position1 = this.result;
@@ -168,19 +166,14 @@ export class CalculadoraPage {
   }
 
   getQuestions() {
-    console.log("sadadas", this.Selected_Operation.id);
     this.questionsService.questions(this.Selected_Operation.id, this.hits)
       .subscribe(res => {
         this.level = res.data[0].stage;
-        console.log("Nivel:::::", res.data[0].stage);
         this.questoes = res.data;
         this.Number1 = res.data[0].problem;
         this.result = res.data[0].result;
         this.questions(this.result)
         this.mathproblem_id = res.data[0].id
-        console.log("Resultado", this.result);
-        console.log("Questões ", this.questoes);
-        console.log("id problema ", this.mathproblem_id);
       })
   }
 
@@ -231,7 +224,6 @@ export class CalculadoraPage {
   }
 
   scoreLevel() {
-    console.log("Nivel Teste score ", this.level);
     if (this.level === 1) {
       this.pontuacao += this.scoreService.scoreLevel1(this.maxtime);
     }
@@ -245,11 +237,8 @@ export class CalculadoraPage {
   acerto() {
     this.hits += 1;
     const timer = this.maxtime;
-    console.log("tempo de acerto: ", timer);
-    console.log("acertos: ", this.hits);
     //Se o tempo for diferente de zero executa o acerto, se não tempo esgotado
     if (this.maxtime != 0) {
-      console.log("Desabilita o botão: ", this.desabilitar);
       this.scoreLevel()
       this.chaveDeTempo = true;
       let toast = this.toastCtrl.create({
@@ -273,8 +262,6 @@ export class CalculadoraPage {
   //Muda a questão se o tempo esgotar
   tempoEsgotado() {
 
-    console.log("Numeros de tentivas: ", this.contTentativas);
-
     this.getQuestions();
 
     if (this.contTentativas === 0) {
@@ -294,8 +281,6 @@ export class CalculadoraPage {
   }
 
   erro() {
-    console.log("Numeros de tentivas: ", this.contTentativas);
-
     if (this.contTentativas === 0) {
       this.tentativa1 = true;
       this.contTentativas += 1;
@@ -329,11 +314,11 @@ export class CalculadoraPage {
   }
 
   presentAlert() {
+    let time = this.maxtimegame - 1;
     const ponto = String(this.pontuacao)
-    console.log(ponto);
     let alert = this.alertCtrl.create({
       title: 'Seu desempenho',
-      subTitle: ("Pontuação: " + ponto + ", Tempo: " + this.maxtimegame),
+      subTitle: ("Pontuação: " + ponto + ", Tempo: " + time),
       buttons: ['Fechar']
     });
     alert.present();
@@ -348,8 +333,7 @@ export class CalculadoraPage {
       hits: this.hits
     }
     this.questionsService.endGame(dados)
-    .subscribe(res => {
-      console.log("FIM PARTIDA: ", res);
+      .subscribe(res => {
         this.presentAlert()
         this.navCtrl.setRoot(HomePage)
       })
@@ -364,21 +348,20 @@ export class CalculadoraPage {
       hits: this.hits,
       mathproblem_id: this.mathproblem_id
     }
-    console.log("Dados da resposta => ", dados);
     this.questionsService.answer(dados)
       .subscribe(res => {
-        console.log("Verific=>  ", res.message);
+
         if (res.message === 'correct_answer') {
           this.desabilitar = true
           this.colorButtonAcerto(click1);
           this.acerto();
-          console.log("Questões de verificação", res);
+
           this.loading.dismiss();
         } else {
           this.colorButtonErro(click1);
         }
       })
-      this.loading.dismiss();
+    this.loading.dismiss();
   }
 
   colorButtonAcerto(click1: any) {

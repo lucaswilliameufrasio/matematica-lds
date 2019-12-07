@@ -27,7 +27,7 @@ export class RankingPage {
     this.rankingService.ranking(this.Selected_Operation.id)
       .subscribe(res => {
         this.ranking = res.data
-        this.ranking.sort((a, b) => (a.score < b.score) ? -1 : 1);
+        //this.ranking.sort((a, b) => (a.score < b.score) ? -1 : 1);
         console.log("Ranking:::", this.ranking);
       });
   }

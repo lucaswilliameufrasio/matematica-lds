@@ -33,8 +33,8 @@
   <hr>
   
   <ion-list>
-      <ion-item>
-        <p class="nome">Pontuação: &nbsp; {{ranking?.data[0].score}} <br> Tempo: &nbsp; {{ranking?.data[0].time}}</p>
+      <ion-item *ngFor="let index of matches.data; let i = index">
+        <p class="nome">{{i+1}} - Pontuação: &nbsp; {{index?.score}} &nbsp;&nbsp; Tempo: &nbsp; {{index?.time}}</p>
       </ion-item>
   </ion-list>
 

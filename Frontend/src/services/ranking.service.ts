@@ -22,6 +22,12 @@ export class RankingService {
       .catch(this.handleError);
   }
 
+  listMyMatches(operation): Observable<any> {
+    return this.http.get(this.api + '/listMyMatches/' + operation)
+      .pipe()
+      .catch(this.handleError);
+  }
+
   //Exibe mensagem de erro caso no console
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);

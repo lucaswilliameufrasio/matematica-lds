@@ -6,12 +6,10 @@
     <ion-title *ngIf="Selected_Operation.id == 4">Divisão</ion-title>
     <ion-title *ngIf="Selected_Operation.id == 5">Exponenciação</ion-title>
   </ion-navbar>
+  
 </ion-header>
 
-<ion-content
-  padding
-  class="login_page"
->
+<ion-content padding class="login_page">
   <ion-grid>
     <ion-row>
       <ion-col width-25>
@@ -19,46 +17,21 @@
           <ion-row>
             <div class="acertos">
               <ion-col>
-                  <div class="tempo_tot" *ngIf="hidevalue==false">{{maxtimegame}}</div>
               </ion-col>
               <ion-col>
 
-                <ion-icon
-                  *ngIf="tentativa1 === false"
-                  class="vidas"
-                  name="heart"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="tentativa1 === true"
-                  class="erro"
-                  name="heart"
-                ></ion-icon>
+                <ion-icon *ngIf="tentativa1 === false" class="vidas" name="heart"></ion-icon>
+                <ion-icon *ngIf="tentativa1 === true" class="erro" name="heart"></ion-icon>
               </ion-col>
 
               <ion-col>
-                <ion-icon
-                  *ngIf="tentativa2 === false"
-                  class="vidas"
-                  name="heart"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="tentativa2 === true"
-                  class="erro"
-                  name="heart"
-                ></ion-icon>
+                <ion-icon *ngIf="tentativa2 === false" class="vidas" name="heart"></ion-icon>
+                <ion-icon *ngIf="tentativa2 === true" class="erro" name="heart"></ion-icon>
               </ion-col>
 
               <ion-col>
-                <ion-icon
-                  *ngIf="tentativa3 === false"
-                  class="vidas"
-                  name="heart"
-                ></ion-icon>
-                <ion-icon
-                  *ngIf="tentativa3 === true"
-                  class="erro"
-                  name="heart"
-                ></ion-icon>
+                <ion-icon *ngIf="tentativa3 === false" class="vidas" name="heart"></ion-icon>
+                <ion-icon *ngIf="tentativa3 === true" class="erro" name="heart"></ion-icon>
               </ion-col>
 
             </div>
@@ -73,115 +46,61 @@
         <div class="pontostit">Tempo</div>
         <div class="pontos">{{maxtime}}</div>
       </ion-col>
+      <ion-col width-75>
+        <div class="pontostit">Nível</div>
+        <div class="pontos">{{level}}</div>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-grid>
     <ion-row>
-      <ion-col
-        class="Column_title operacao"
-        text-center
-      >
-      {{questoes[0]?.problem}}
+      <ion-col class="Column_title operacao" text-center>
+        {{questoes[0]?.problem}}
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col
-        class="Columns_Numbers"
-        text-center
-      >
-        <ion-buttons
-          (click)="verifyAnswer(Value_Position1,'1')"
-          id="1"
-        >
-          <button
-            [disabled]="desabilitar"
-            class="Button_Share"
-            ion-button
-            [ngStyle]="{'background-color': buttonColor1}"
-          >
+      <ion-col class="Columns_Numbers" text-center>
+        <ion-buttons (click)="verifyAnswer(Value_Position1,'1')" id="1">
+          <button [disabled]="desabilitar" class="Button_Share" ion-button
+            [ngStyle]="{'background-color': buttonColor1}">
             {{Value_Position1}}
           </button>
         </ion-buttons>
       </ion-col>
-      <ion-col
-        class="Columns_Numbers"
-        text-center
-      >
-        <ion-buttons
-          (click)="verifyAnswer(Value_Position2, '2')"
-          id="2"
-        >
-          <button
-            [disabled]="desabilitar"
-            class="Button_Share"
-            ion-button
-            [ngStyle]="{'background-color': buttonColor2}"
-          >
+      <ion-col class="Columns_Numbers" text-center>
+        <ion-buttons (click)="verifyAnswer(Value_Position2, '2')" id="2">
+          <button [disabled]="desabilitar" class="Button_Share" ion-button
+            [ngStyle]="{'background-color': buttonColor2}">
             {{Value_Position2}}
           </button>
         </ion-buttons>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col
-        class="Columns_Numbers"
-        text-center
-      >
-        <ion-buttons
-          (click)="verifyAnswer(Value_Position3,'3')"
-          id="3"
-        >
-          <button
-            [disabled]="desabilitar"
-            class="Button_Share"
-            ion-button
-            [ngStyle]="{'background-color': buttonColor3}"
-          >
+      <ion-col class="Columns_Numbers" text-center>
+        <ion-buttons (click)="verifyAnswer(Value_Position3,'3')" id="3">
+          <button [disabled]="desabilitar" class="Button_Share" ion-button
+            [ngStyle]="{'background-color': buttonColor3}">
             {{Value_Position3}}
           </button>
         </ion-buttons>
       </ion-col>
-      <ion-col
-        class="Columns_Numbers"
-        text-center
-      >
-        <ion-buttons
-          (click)="verifyAnswer(Value_Position4,'4')"
-          id="4"
-        >
-          <button
-            [disabled]="desabilitar"
-            class="Button_Share"
-            ion-button
-            [ngStyle]="{'background-color': buttonColor4}"
-          >
+      <ion-col class="Columns_Numbers" text-center>
+        <ion-buttons (click)="verifyAnswer(Value_Position4,'4')" id="4">
+          <button [disabled]="desabilitar" class="Button_Share" ion-button
+            [ngStyle]="{'background-color': buttonColor4}">
             {{Value_Position4}}
           </button>
         </ion-buttons>
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col
-        class="Columns_Numbers"
-        text-center
-      >
-        <ion-buttons
-          (click)="onButtonClick()"
-          id="3"
-        >
-          <button
-            class="Button_Share vol"
-            ion-button
-          >
-            <ion-icon
-              *ngIf="buttonClicked"
-              name="volume-up"
-            ></ion-icon>
-            <ion-icon
-              *ngIf="!buttonClicked"
-              name="volume-off"
-            ></ion-icon>
+      <ion-col class="Columns_Numbers" text-center>
+        <ion-buttons (click)="onButtonClick()" id="3">
+          <button class="Button_Share vol" ion-button>
+            <ion-icon *ngIf="buttonClicked" name="volume-up"></ion-icon>
+            <ion-icon *ngIf="!buttonClicked" name="volume-off"></ion-icon>
           </button>
         </ion-buttons>
       </ion-col>

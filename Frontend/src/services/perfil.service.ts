@@ -25,6 +25,13 @@ export class PerfilService {
       catchError(this.handleError)
     )
   }
+  
+  editar(dados):Observable<any>{
+    return this.http.patch(this.api + '/auth/updateMe', dados)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
   //Exibe mensagem de erro caso no console
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
