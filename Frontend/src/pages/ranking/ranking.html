@@ -9,11 +9,8 @@
 
 <ion-content padding>
 
-  <ion-list *ngFor="let index of ranking.data">
-    <ion-item>
-      <p class="nome">Lucas William</p>
-      <p class="ponto">{{index?.match_id}}</p>
-    </ion-item>
-  </ion-list>
+  <ion-item *ngFor="let index of ranking; let i = index">
+    <p class="nome"> {{i+1}} - {{index?.name}}:&nbsp; {{index?.score}} </p>
+  </ion-item>
 
 </ion-content>

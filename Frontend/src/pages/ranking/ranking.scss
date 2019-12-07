@@ -1,30 +1,45 @@
 page-ranking {
-    .nome {
-        font-size: 18px;
-    }
+  .nome {
+    font-size: 18px;
+  }
 
-    .toolbar-background {
-        background: #211d70;
-        color: white;
-      }
+  .toolbar-background {
+    background: #211d70;
+    color: white;
+  }
 
-    .ponto {
-        font-size: 13px;
-    }
+  .ponto {
+    font-size: 13px;
+  }
 
-    .item-md p {
-        margin: 0 0 -8px !important;
-    }
+  .item-md p {
+    margin: 0 0 -8px !important;
+  }
 
-    .toolbar-title {
-        color: white;
-      }
-      ion-navbar.toolbar {
+  .toolbar-title {
+    color: white;
+  }
 
-        color: #fff;
-    }
+  ion-navbar.toolbar {
 
-    .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
-        color: #fff;
-    }
+    color: #fff;
+  }
+
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #fff;
+  }
+
+  .pontostit {
+    color: #FFF;
+    text-align: center;
+  }
+
+  .pontos {
+    color: #FFF;
+    font-size: 4rem;
+    text-align: center;
+    line-height: 1;
+  }
 }
