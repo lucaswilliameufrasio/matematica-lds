@@ -12,9 +12,9 @@ class MathProblemsController extends Controller
     {
         if ($hits <= 9) {
             return 1;
-        } else if ($hits <= 15) {
+        } else if ($hits > 9 or $hits <= 15) {
             return 2;
-        } else if ($hits <= 20) {
+        } else if ($hits > 15) {
             return 3;
         }
     }
