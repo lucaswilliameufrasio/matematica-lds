@@ -37,7 +37,7 @@ export class PartidaPage {
     this.rankingService.listMyMatches(this.Selected_Operation.id)
       .subscribe(res => {
         this.matches = res;
-        if (this.matches.status === 'token_expired'){
+        if (res.status === 'token_expired'){
           this.navCtrl.setRoot(LoginPage);
         }
         console.log(res);
