@@ -4,6 +4,7 @@ import { PerfilService } from '../../services/perfil.service';
 import { RankingService } from '../../services/ranking.service';
 import { EditarPerfilPage } from '../editar-perfil/editar-perfil';
 import { LoadingService } from '../../services/loading.service';
+import { LoginPage } from '../login/login';
 
 
 
@@ -32,6 +33,9 @@ export class PerfilPage {
     this.perfilService.perfil()
       .subscribe(res => {
         this.perfil = res
+        if (this.perfil.status === 'token_expired') {
+          this.navCtrl.setRoot(LoginPage);
+        }
       })
     this.loading.dismiss()
   }

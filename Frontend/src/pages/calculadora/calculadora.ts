@@ -291,7 +291,6 @@ export class CalculadoraPage {
     }
     else if (this.contTentativas === 2) {
       this.stopTimeGame = true;
-      console.log("Tempo da partida: ", this.maxtimegame);
       this.tentativa3 = true;
       this.contTentativas += 1;
       this.fimPartida()
@@ -306,9 +305,6 @@ export class CalculadoraPage {
     toast.onDidDismiss(() => {
       this.backToWhite();
     });
-    // toast.onDidDismiss(() => {
-    // 	this.changeNumber(this.valor, this.click1);
-    // });
     toast.present();
     this.loading.dismiss()
   }
@@ -350,7 +346,6 @@ export class CalculadoraPage {
     }
     this.questionsService.answer(dados)
       .subscribe(res => {
-
         if (res.message === 'correct_answer') {
           this.desabilitar = true
           this.colorButtonAcerto(click1);
@@ -392,19 +387,15 @@ export class CalculadoraPage {
     if (click1 == 1) {
       this.buttonColor1 = '#ff9600';
       if (this.Correct_position == this.Position1) {
-        // this.buttonColor1 = '#70e733';
         this.erro();
       }
       else if (this.Correct_position == this.Position2) {
-        // this.buttonColor2 = '#70e733';
         this.erro();
       }
       else if (this.Correct_position == this.Position3) {
-        // this.buttonColor3 = '#70e733';
         this.erro();
       }
       else if (this.Correct_position == this.Position4) {
-        // this.buttonColor4 = '#70e733';
         this.erro();
       }
     } else if (click1 == 2) {
@@ -505,31 +496,6 @@ export class CalculadoraPage {
 
       this.result = Math.pow(this.Number1, this.Number2);
     }
-
-    // if (this.Correct_position == this.Position1) {
-    //   this.Value_Position1 = this.result;
-    //   this.Value_Position2 = this.result + Math.floor(Math.random() * 25 + 1);
-    //   this.Value_Position3 = this.result - 5;
-    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    // }
-    // else if (this.Correct_position == this.Position2) {
-    //   this.Value_Position2 = this.result;
-    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-    //   this.Value_Position3 = this.result - 5;
-    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    // }
-    // else if (this.Correct_position == this.Position3) {
-    //   this.Value_Position3 = this.result;
-    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-    //   this.Value_Position2 = this.result - 5;
-    //   this.Value_Position4 = Math.floor(Math.random() * 100 + 1);
-    // }
-    // else if (this.Correct_position == this.Position4) {
-    //   this.Value_Position4 = this.result;
-    //   this.Value_Position1 = this.result + Math.floor(Math.random() * 25 + 1);
-    //   this.Value_Position2 = this.result - 5;
-    //   this.Value_Position3 = Math.floor(Math.random() * 100 + 1);
-    // }
 
     this.buttonColor1 = '#fff9ff';
     this.buttonColor2 = '#fff9ff';
