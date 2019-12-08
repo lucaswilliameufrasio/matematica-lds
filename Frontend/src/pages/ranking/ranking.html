@@ -6,11 +6,23 @@
 
 </ion-header>
 
-
 <ion-content padding>
+  <ion-list *ngIf="ranking?.length != 0; else vazio">
+    <ion-item *ngFor="let index of ranking; let i = index">
+      <p class="nome">
+        {{i+1}} - {{index?.name}}:&nbsp; {{index?.score}}
+      </p>
+    </ion-item>
+  </ion-list>
 
-  <ion-item *ngFor="let index of ranking; let i = index">
-    <p class="nome"> {{i+1}} - {{index?.name}}:&nbsp; {{index?.score}} </p>
-  </ion-item>
-
+  <ng-template #vazio>
+    <ion-item>
+      <p
+        text-center
+        class="nome"
+      >
+        Nem uma partida iniciada
+      </p>
+    </ion-item>
+  </ng-template>
 </ion-content>

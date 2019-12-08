@@ -19,7 +19,6 @@ export class RankingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RankingPage');
     this.getRanking()
   }
 
@@ -30,12 +29,5 @@ export class RankingPage {
         this.ranking = res.data
       });
     this.loading.dismiss()
-  }
-
-  public sortByKey(array, key) {
-    return array.sort(function (a, b) {
-      var x = a[key]; var y = b[key];
-      return ((x < y) ? -1 : ((x > y) ? 0 : 1));
-    });
   }
 }

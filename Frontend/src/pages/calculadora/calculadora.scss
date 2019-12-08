@@ -21,7 +21,7 @@
 }
 
 ion-toast.error .toast-wrapper {
-	background: #ff9600;
+  background: #ff9600;
 }
 
 .toast-md .toast-message {
@@ -37,11 +37,11 @@ ion-toast.error .toast-wrapper {
 }
 
 page-calculadora {
-  .login_page{
-    background:url(../assets/img/bg.png)no-repeat;
-    background-size:100% 100%;
-    padding:20px;
-    margin:0
+  .login_page {
+    background: url(../assets/img/bg.png)no-repeat;
+    background-size: 100% 100%;
+    padding: 20px;
+    margin: 0
   }
 
   .pontos {
@@ -87,14 +87,14 @@ page-calculadora {
     padding: 0 12px;
     font-size: 4rem;
     font-weight: 500;
-}
+  }
 
   .op {
-	font-size: 1.0em;
+    font-size: 1.0em;
   }
 
   .operacao {
-	  color: #fbff45;
+    color: #fbff45;
     text-shadow: 0 0 3px #211d70, 0 0 11px #211d70;
   }
 
@@ -123,7 +123,7 @@ page-calculadora {
   }
 
   .button-md {
-	  height: 6.6rem;
+    height: 6.6rem;
     padding-top: 18px;
     padding-bottom: 14px;
     border-radius: 17px;
@@ -132,10 +132,10 @@ page-calculadora {
   }
 
   .vol {
-	  padding-bottom: 10px;
-	  padding-top: 10px;
-	  background-color: brown;
-	  color: #fff;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: brown;
+    color: #fff;
   }
 
   .titulo {
@@ -151,4 +151,10 @@ page-calculadora {
     font-size: 5em;
     font-weight: 900;
   }
+
+  .botao_sair {
+    color: #fff;
+    font-size: large;
+  }
+
 }

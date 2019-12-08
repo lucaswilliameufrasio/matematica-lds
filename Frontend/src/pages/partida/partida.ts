@@ -4,6 +4,7 @@ import { CalculadoraPage } from '../calculadora/calculadora';
 import { RankingService } from '../../services/ranking.service';
 import { RankingPage } from '../ranking/ranking';
 import { LoadingService } from '../../services/loading.service';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -36,6 +37,9 @@ export class PartidaPage {
     this.rankingService.listMyMatches(this.Selected_Operation.id)
       .subscribe(res => {
         this.matches = res;
+        if (this.matches.status === 'token_expired'){
+          this.navCtrl.setRoot(LoginPage);
+        }
         console.log(res);
       })
     this.loading.dismiss();
